@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    password:
+    url: jdbc:mysql://localhost:3306/federation2
+    username: root
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    #   désactive la validation hibernate lors de la persistence
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+    #  security:
+#    user:
+#      name: admin
+#      password: admin
