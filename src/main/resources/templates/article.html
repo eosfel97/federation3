@@ -34,7 +34,7 @@
             <td th:text="${a.description}"></td>
             <td th:text="${a.prix}"></td>
             <td th:text="${a.quantite}"></td>
-            <td><a th:href="@{delete(id=${a.id},page=${pageCourante},size= ${size}, motCle=${motCle})}">Delete</a></td>
+            <td><a onclick="return alert('vous êtes sur ?')" th:href="@{delete(id=${a.id},page=${pageCourante},size= ${size}, motCle=${motCle})}">Delete</a></td>
         </tr>
         </tbody>
     </table>
