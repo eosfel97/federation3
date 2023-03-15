@@ -64,7 +64,7 @@ public class ArticleController {
             String filename = UUID.randomUUID().toString() + "-" + originalFilename;
 
             // Enregistrer l'image dans le répertoire de stockage des images
-            Path imagePath = Paths.get("/home/gnahiet/images/").resolve(filename);
+            Path imagePath = Paths.get("/images/").resolve(filename);
             Files.copy(imageFile.getInputStream(), imagePath, StandardCopyOption.REPLACE_EXISTING);
 
             // Enregistrer le chemin d'accès à l'image dans l'entité Article

@@ -12,25 +12,24 @@
         <div class="panel-body">
             <div class="form-group">
                 <label>id : </label>
-                <label th:text="$article.id"></label>
+                <label th:text="${article.id}"></label>
             </div>
             <div class="form-group">
                 <label>nom : </label>
-                <label th:text="$article.nom"></label>
+                <label th:text="${article.nom}"></label>
             </div>
             <div class="form-group">
                 <label>description : </label>
-                <label th:text="$article.description"></label>
+                <label th:text="${article.description}"></label>
             </div>
             <div class="form-group">
                 <label>prix : </label>
-                <label th:text="$article.prix"></label>
+                <label th:text="${article.prix}"></label>
             </div>
             <div class="form-group">
                 <label>image : </label>
+                <img th:src="@{/images/__${article.image}__}" />
             </div>
-
-
         </div>
     </div>
 </div>

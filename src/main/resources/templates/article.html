@@ -27,16 +27,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="a:${listArticles}">
+        <tr th:each="a : ${listArticles}">
             <td th:text="${a.id}"></td>
-            <td th:text="${a.image}"></td>
+            <td><img th:src="@{/images/__${a.image}__}" /></td>
             <td th:text="${a.nom}"></td>
             <td th:text="${a.description}"></td>
             <td th:text="${a.prix}"></td>
             <td th:text="${a.quantite}"></td>
-            <td><a onclick="return confirm('vous êtes sur ?')" th:href="@{delete(id=${a.id},page=${pageCourante},size= ${size}, motCle=${motCle})}">Delete</a></td>
+            <td><a onclick="return confirm('vous êtes sur ?')" th:href="@{delete(id=${a.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Delete</a></td>
         </tr>
         </tbody>
+
     </table>
 </div>
 <div class="container">
