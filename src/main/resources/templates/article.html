@@ -29,7 +29,7 @@
         <tbody>
         <tr th:each="a : ${listArticles}">
             <td th:text="${a.id}"></td>
-            <td><img th:src="@{/images/__${a.image}__}" /></td>
+            <td><img th:src="@{'/images/' + ${a.image}}" /></td>
             <td th:text="${a.nom}"></td>
             <td th:text="${a.description}"></td>
             <td th:text="${a.prix}"></td>
