@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un article</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Confirmation</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label>id : </label>
+                <label th:text="$article.id"></label>
+            </div>
+            <div class="form-group">
+                <label>nom : </label>
+                <label th:text="$article.nom"></label>
+            </div>
+            <div class="form-group">
+                <label>description : </label>
+                <label th:text="$article.description"></label>
+            </div>
+            <div class="form-group">
+                <label>prix : </label>
+                <label th:text="$article.prix"></label>
+            </div>
+            <div class="form-group">
+                <label>image : </label>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
