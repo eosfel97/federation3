@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 7070
 spring:
   datasource:
     password:
@@ -9,7 +9,7 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     #   désactive la validation hibernate lors de la persistence
     properties:
       javax:

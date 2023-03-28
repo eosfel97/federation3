@@ -31,9 +31,10 @@
             <td th:text="${a.id}"></td>
             <td><img th:src="@{'/images/' + ${a.image}}" /></td>
             <td th:text="${a.nom}"></td>
-            <td th:text="${a.description}"></td>
+
             <td th:text="${a.prix}"></td>
             <td th:text="${a.quantite}"></td>
+            <td th:text="${a.description}"></td>
             <td><a onclick="return confirm('vous êtes sur ?')" th:href="@{delete(id=${a.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Delete</a></td>
         </tr>
         </tbody>
@@ -47,7 +48,5 @@
             </li>
         </ul>
 </div>
-
-
 </body>
 </html>
