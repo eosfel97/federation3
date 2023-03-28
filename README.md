@@ -6,7 +6,8 @@ liste des fonctionnalités :
 Any : 
 - Gestion des commandes 
 - Gestion des club
-- Gestion des utilisateurs 
+- Gestion des utilisateurs
+- Gestion des articles
 
 Fabrice :
  - Gestion des équipes
@@ -15,7 +16,7 @@ Fabrice :
  - Gestion des compétitions
  
  Annexes :
-  - Gestion des articles
+  
   - Gestion des actualités
   - Gestion des saisons
   - Gestion des categories de footaball
