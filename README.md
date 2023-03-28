@@ -4,7 +4,16 @@ liste des fonctionnalités :
 
 
 Any : 
-- Gerer les Produit 
-- Gerer les Club
-- Gerer adhérent 
+- Gestion des commandes 
+- Gestion des club
+- Gestion des utilisateurs 
+
+Fabrice :
+ - Gestion des équipes
+ - Gestion des rencontres
+ - Gestion des compétitions
+ 
+ Annexes :
+  - Gestion des actualités
+  - Gestion des saisons
 
