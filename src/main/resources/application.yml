@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     password:
-    url: jdbc:mysql://localhost:3306/federation2
+    url: jdbc:mysql://localhost:3306/federation3
     username: root
   jpa:
     generate-ddl: true

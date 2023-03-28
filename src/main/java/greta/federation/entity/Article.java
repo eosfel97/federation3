@@ -1,44 +1,53 @@
 package greta.federation.entity;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name="article")
 public class Article {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id_article")
+    private int idArticle;
 
+    @Column(name="nom")
     private String nom;
 
+    @Column(name="description")
     private String description;
 
-    private String image;
-
+    @Column(name="prix")
     private double prix;
 
+    @Column(name="quantite")
     private int quantite;
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="id_categorie")
+    private Categorie categorie;
+
+    //constructeurs
+
     public Article() {
-        super();
     }
 
-    public Article(String nom, String description, String image, double prix, int quantite) {
+    public Article(int idArticle, String nom, String description, double prix, int quantite, Categorie categorie) {
+        this.idArticle = idArticle;
         this.nom = nom;
         this.description = description;
-        this.image = image;
         this.prix = prix;
         this.quantite = quantite;
+        this.categorie = categorie;
+    }
+    // getters et setters
+
+    public int getIdArticle() {
+        return idArticle;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdArticle(int idArticle) {
+        this.idArticle = idArticle;
     }
 
     public String getNom() {
@@ -57,14 +66,6 @@ public class Article {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public double getPrix() {
         return prix;
     }
@@ -79,5 +80,13 @@ public class Article {
 
     public void setQuantite(int quantite) {
         this.quantite = quantite;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
     }
 }
