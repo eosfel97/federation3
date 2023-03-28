@@ -10,10 +10,14 @@ Any :
 
 Fabrice :
  - Gestion des équipes
+ - Gestion des joueurs
  - Gestion des rencontres
  - Gestion des compétitions
  
  Annexes :
+  - Gestion des articles
   - Gestion des actualités
   - Gestion des saisons
+  - Gestion des categories de footaball
+  - Gestion des arbitres
 
