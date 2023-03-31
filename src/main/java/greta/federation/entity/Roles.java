@@ -1,6 +1,8 @@
 package greta.federation.entity;
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name="roles")
 public class Roles {
@@ -12,17 +14,30 @@ public class Roles {
 
     @Column(name="nom")
     private String nom;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private List<User> users;
 
     //constructeurs
 
     public Roles() {
     }
 
-    public Roles(int idRoles, String nom) {
+    public Roles(int idRoles, String nom, List<User> users) {
         this.idRoles = idRoles;
         this.nom = nom;
+        this.users = users;
     }
-// getters et setters
+
+    // getters et setters
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     public int getIdRoles() {
         return idRoles;
