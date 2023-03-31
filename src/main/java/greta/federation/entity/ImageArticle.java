@@ -16,8 +16,7 @@ public class ImageArticle {
 
     @Column(name="description")
     private String description;
-
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="id_article")
     private Article article;
 
@@ -32,6 +31,7 @@ public class ImageArticle {
         this.description = description;
         this.article = article;
     }
+
 // getters et setters
 
     public int getIdImageArticle() {

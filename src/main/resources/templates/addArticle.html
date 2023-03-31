@@ -7,34 +7,37 @@
 </head>
 <body>
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">Ajouter un article</div>
-        <div class="panel-body">
-            <form th:action="@{save}"  method="post" enctype="multipart/form-data" >
-                <div class="form-group">
-                    <label class="control-label">Nom:</label>
-                    <input class="form-control" type="text" name="nom" th:value="${article.nom}"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Description:</label>
-                    <textarea class="form-control" name="description" th:value="${article.description}"> </textarea>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Image:</label>
-                    <input class="form-control" type="file" name="imageFile" accept="image/png,image/jpeg, image/jpg"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Prix:</label>
-                    <input class="form-control" type="number" min="0" step="0.01" name="prix" th:value="${article.prix}"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Quantité:</label>
-                    <input class="form-control" type="number" min="0" name="quantite" th:value="${article.quantite}" />
-                </div>
-                <button type="submit" class="btn btn-primary">Ajouter</button>
-            </form>
+    <form th:action="@{/save}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input type="text" class="form-control" id="nom" name="nom" required />
         </div>
-    </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="prix">Prix:</label>
+            <input type="number" class="form-control" id="prix" name="prix" min="0" step="0.01" required />
+        </div>
+        <div class="form-group">
+            <label for="quantite">Quantité:</label>
+            <input type="number" class="form-control" id="quantite" name="quantite" min="0" required />
+        </div>
+        <div class="form-group">
+            <label for="categorie">Catégorie:</label>
+            <select class="form-control" id="categorie" name="categorie.idCategorie" required>
+                <option th:each="categorie : ${categories}"  th:text="${categorie.nom}" />
+            </select>
+        </div>
+        <input th:text="${categorie.nom}" />
+
+        <div class="form-group">
+            <label for="images">Images:</label>
+            <input type="file" class="form-control-file" id="images" name="images" multiple />
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
 </div>
 </body>
 </html>
