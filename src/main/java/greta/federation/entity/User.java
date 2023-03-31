@@ -1,6 +1,7 @@
 package greta.federation.entity;
 
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import javax.persistence.*;
 @Entity
 @Table(name="Users")
@@ -26,10 +27,12 @@ public class User {
     @Column(name="identifiant")
     private String identifiant;
 
-    @Column(name="password")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "mot de passe doit contenir au minimum 8 caracteres dont 1 maj, 1 min, 1 chiffre et 1 caractere spécial(@$!%*?&)")
+    @Column(name="password",nullable = false, length = 255)
     private String password;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="id_roles")
     private Roles roles;
 

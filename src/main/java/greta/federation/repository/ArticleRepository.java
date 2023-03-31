@@ -1,4 +1,4 @@
-package greta.federation.dao;
+package greta.federation.repository;
 
 import greta.federation.entity.Article;
 import org.springframework.data.domain.Page;
