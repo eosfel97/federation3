@@ -1,6 +1,8 @@
 package greta.federation.entity;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "stade")
 public class Stade {
@@ -18,18 +20,23 @@ public class Stade {
 
     @Column(name = "type_terrain")
     private String typeTerrain;
+
+    @OneToMany (mappedBy ="stade",cascade=CascadeType.ALL)
+    private List<Club> clubs;
     //constructeurs
 
     public Stade() {
     }
 
-    public Stade(Integer idStade, String nom, Integer nbPlaces, String typeTerrain) {
+    public Stade(Integer idStade, String nom, Integer nbPlaces, String typeTerrain, List<Club> clubs) {
         this.idStade = idStade;
         this.nom = nom;
         this.nbPlaces = nbPlaces;
         this.typeTerrain = typeTerrain;
+        this.clubs = clubs;
     }
-    //getters and setters
+
+//getters and setters
 
     public Integer getIdStade() {
         return idStade;
@@ -61,5 +68,13 @@ public class Stade {
 
     public void setTypeTerrain(String typeTerrain) {
         this.typeTerrain = typeTerrain;
+    }
+
+    public List<Club> getClubs() {
+        return clubs;
+    }
+
+    public void setClubs(List<Club> clubs) {
+        this.clubs = clubs;
     }
 }

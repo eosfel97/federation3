@@ -36,7 +36,7 @@ public class Equipe {
     @JoinColumn(name = "id_categorie_football")
     private CategorieFootball categorieFootball;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "id_club")
     private Club club;
     //constructeurs
@@ -57,7 +57,7 @@ public class Equipe {
         this.club = club;
     }
 
-    // Getters and setters
+// Getters and setters
 
     public int getIdEquipe() {
         return idEquipe;

@@ -1,85 +1,29 @@
-package greta.federation.entity;
+package greta.federation.dto;
+
+import greta.federation.entity.Equipe;
+import greta.federation.entity.Stade;
+import greta.federation.entity.User;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "club")
-public class Club {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_club")
-    private int idClub;
-
-    @Column(name = "nom", nullable = false, length = 50)
+public class ClubDto {
     private String nom;
-
-    @Column(name = "numero_rue")
     private int numeroRue;
-
-    @Column(name = "nom_rue", nullable = false, length = 100)
     private String nomRue;
-
-    @Column(name = "ville", length = 50)
     private String ville;
-
-    @Column(name = "code_postal")
     private int codePostal;
-
-    @Column(name = "date_creation", nullable = false)
     private Date dateCreation;
-
-    @Column(name = "nom_etablissement_etat", nullable = false, length = 50)
     private String nomEtablissementEtat;
-
-    @Column(name = "nom_assurance", nullable = false, length = 50)
     private String nomAssurance;
-
-    @Column(name = "rib", nullable = false, length = 50)
     private String rib;
-
-    @Column(name = "attestation_assurance", nullable = false, length = 50)
     private String attestationAssurance;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
     private User user;
-
-    @OneToMany (mappedBy ="club",cascade=CascadeType.ALL)
     private List<Equipe> equipes;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_stade")
     private Stade stade;
-    //constructeurs
 
-    public Club() {
-    }
-
-    public Club(int idClub, String nom, int numeroRue, String nomRue, String ville, int codePostal, Date dateCreation, String nomEtablissementEtat, String nomAssurance, String rib, String attestationAssurance, User user, Stade stade) {
-        this.idClub = idClub;
-        this.nom = nom;
-        this.numeroRue = numeroRue;
-        this.nomRue = nomRue;
-        this.ville = ville;
-        this.codePostal = codePostal;
-        this.dateCreation = dateCreation;
-        this.nomEtablissementEtat = nomEtablissementEtat;
-        this.nomAssurance = nomAssurance;
-        this.rib = rib;
-        this.attestationAssurance = attestationAssurance;
-        this.user = user;
-        this.stade = stade;
-    }
-        // getters and setters
-
-    public int getIdClub() {
-        return idClub;
-    }
-
-    public void setIdClub(int idClub) {
-        this.idClub = idClub;
-    }
+    // g and S
 
     public String getNom() {
         return nom;
@@ -167,6 +111,14 @@ public class Club {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
     }
 
     public Stade getStade() {

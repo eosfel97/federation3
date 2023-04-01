@@ -14,8 +14,7 @@ public class Roles {
 
     @Column(name="nom")
     private String nom;
-    @ManyToOne
-    @JoinColumn(name = "id_user")
+    @OneToMany (mappedBy ="roles",cascade=CascadeType.ALL)
     private List<User> users;
 
     //constructeurs
