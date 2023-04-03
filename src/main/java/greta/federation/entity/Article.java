@@ -1,7 +1,6 @@
 package greta.federation.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,15 +28,15 @@ public class Article {
     @JoinColumn(name="id_categorie")
     private Categorie categorie;
 
-    @OneToMany(mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
-    private List<ImageArticle> images;
+    @OneToMany(mappedBy="article", cascade=CascadeType.ALL)
+    private List<Image> images;
 
     //constructeurs
 
     public Article() {
     }
 
-    public Article(int idArticle, String nom, String description, double prix, int quantite, Categorie categorie, List<ImageArticle> images) {
+    public Article(int idArticle, String nom, String description, double prix, int quantite, Categorie categorie, List<Image> images) {
         this.idArticle = idArticle;
         this.nom = nom;
         this.description = description;
@@ -97,11 +96,11 @@ public class Article {
         this.categorie = categorie;
     }
 
-    public List<ImageArticle> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<ImageArticle> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 }

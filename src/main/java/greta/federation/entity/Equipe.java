@@ -1,5 +1,6 @@
 package greta.federation.entity;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "equipe")
@@ -24,10 +25,10 @@ public class Equipe {
     @Column(name = "nb_point_saison")
     private int nbPointSaison;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
-
+    @OneToMany (mappedBy ="equipe",cascade=CascadeType.ALL)
+    private List<User> users;
+    @OneToMany (mappedBy ="equipe",cascade=CascadeType.ALL)
+    private List<Joueur> joueurs;
     @ManyToOne
     @JoinColumn(name = "id_saison")
     private Saison saison;
@@ -39,19 +40,21 @@ public class Equipe {
     @ManyToOne()
     @JoinColumn(name = "id_club")
     private Club club;
+
     //constructeurs
 
     public Equipe() {
     }
 
-    public Equipe(int idEquipe, String nom, int nbJoueurs, String meilleurButeur, String meilleurPasseur, int nbPointSaison, User user, Saison saison, CategorieFootball categorieFootball, Club club) {
+    public Equipe(int idEquipe, String nom, int nbJoueurs, String meilleurButeur, String meilleurPasseur, int nbPointSaison, List<User> users, List<Joueur> joueurs, Saison saison, CategorieFootball categorieFootball, Club club) {
         this.idEquipe = idEquipe;
         this.nom = nom;
         this.nbJoueurs = nbJoueurs;
         this.meilleurButeur = meilleurButeur;
         this.meilleurPasseur = meilleurPasseur;
         this.nbPointSaison = nbPointSaison;
-        this.user = user;
+        this.users = users;
+        this.joueurs = joueurs;
         this.saison = saison;
         this.categorieFootball = categorieFootball;
         this.club = club;
@@ -107,12 +110,12 @@ public class Equipe {
         this.nbPointSaison = nbPointSaison;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public Saison getSaison() {
@@ -138,4 +141,13 @@ public class Equipe {
     public void setClub(Club club) {
         this.club = club;
     }
+
+    public List<Joueur> getJoueurs() {
+        return joueurs;
+    }
+
+    public void setJoueurs(List<Joueur> joueurs) {
+        this.joueurs = joueurs;
+    }
+
 }

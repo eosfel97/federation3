@@ -1,6 +1,7 @@
 package greta.federation.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "competition")
@@ -14,25 +15,29 @@ public class Competition {
     @Column(name = "nom", unique = true)
     private String nom;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_type_competition")
     private TypeCompetition typeCompetition;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_categorie_football")
     private CategorieFootball categorieFootball;
+    @OneToMany(mappedBy = "competition")
+    private List<Rencontre> rencontres;
      //constructeurs
 
     public Competition() {
     }
 
-    public Competition(Integer idCompetition, String nom, TypeCompetition typeCompetition, CategorieFootball categorieFootball) {
+    public Competition(Integer idCompetition, String nom, TypeCompetition typeCompetition, CategorieFootball categorieFootball, List<Rencontre> rencontres) {
         this.idCompetition = idCompetition;
         this.nom = nom;
         this.typeCompetition = typeCompetition;
         this.categorieFootball = categorieFootball;
+        this.rencontres = rencontres;
     }
-    //getters and setters
+
+//getters and setters
 
     public Integer getIdCompetition() {
         return idCompetition;
@@ -64,5 +69,13 @@ public class Competition {
 
     public void setCategorieFootball(CategorieFootball categorieFootball) {
         this.categorieFootball = categorieFootball;
+    }
+
+    public List<Rencontre> getRencontres() {
+        return rencontres;
+    }
+
+    public void setRencontres(List<Rencontre> rencontres) {
+        this.rencontres = rencontres;
     }
 }

@@ -3,6 +3,7 @@ package greta.federation.entity;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "commande")
@@ -22,9 +23,8 @@ public class Commande {
     @Column(name = "prix_total")
     private double prixTotal;
 
-    @ManyToOne
-    @JoinColumn(name = "id_ligne_commande")
-    private LigneCommande ligneCommande;
+    @OneToMany(mappedBy = "commande",cascade=CascadeType.ALL)
+    private List<LigneCommande> ligneCommandes;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -36,14 +36,15 @@ public class Commande {
     public Commande() {
     }
 
-    public Commande(int idCommande, LocalDateTime dateCommande, int nbArticle, double prixTotal, LigneCommande ligneCommande, User user) {
+    public Commande(int idCommande, LocalDateTime dateCommande, int nbArticle, double prixTotal, List<LigneCommande> ligneCommandes, User user) {
         this.idCommande = idCommande;
         this.dateCommande = dateCommande;
         this.nbArticle = nbArticle;
         this.prixTotal = prixTotal;
-        this.ligneCommande = ligneCommande;
+        this.ligneCommandes = ligneCommandes;
         this.user = user;
     }
+
     // getters and setters
 
 
@@ -79,13 +80,6 @@ public class Commande {
         this.prixTotal = prixTotal;
     }
 
-    public LigneCommande getLigneCommande() {
-        return ligneCommande;
-    }
-
-    public void setLigneCommande(LigneCommande ligneCommande) {
-        this.ligneCommande = ligneCommande;
-    }
 
     public User getUser() {
         return user;
@@ -93,5 +87,13 @@ public class Commande {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<LigneCommande> getLigneCommandes() {
+        return ligneCommandes;
+    }
+
+    public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
+        this.ligneCommandes = ligneCommandes;
     }
 }

@@ -1,5 +1,6 @@
 package greta.federation.entity;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "evenement_rencontre")
@@ -17,8 +18,10 @@ public class EvenementRencontre {
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "id_joueur", nullable = false)
+    @JoinColumn(name = "id_joueur")
     private Joueur joueur;
+    @OneToMany (mappedBy ="evenementRencontre",cascade=CascadeType.ALL)
+    private List<Joueur> joueurs;
 
     @ManyToOne
     @JoinColumn(name = "id_rencontre", nullable = false)
@@ -27,11 +30,12 @@ public class EvenementRencontre {
     //  constructeurs
     public EvenementRencontre() {}
 
-    public EvenementRencontre(int idEvenementRencontre, String nom, String type, Joueur joueur, Rencontre rencontre) {
+    public EvenementRencontre(int idEvenementRencontre, String nom, String type, Joueur joueur, List<Joueur> joueurs, Rencontre rencontre) {
         this.idEvenementRencontre = idEvenementRencontre;
         this.nom = nom;
         this.type = type;
         this.joueur = joueur;
+        this.joueurs = joueurs;
         this.rencontre = rencontre;
     }
 
@@ -75,5 +79,13 @@ public class EvenementRencontre {
 
     public void setRencontre(Rencontre rencontre) {
         this.rencontre = rencontre;
+    }
+
+    public List<Joueur> getJoueurs() {
+        return joueurs;
+    }
+
+    public void setJoueurs(List<Joueur> joueurs) {
+        this.joueurs = joueurs;
     }
 }

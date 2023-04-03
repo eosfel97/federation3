@@ -1,6 +1,5 @@
 package greta.federation.dto;
 
-import greta.federation.entity.Article;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package greta.federation.entity;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "rencontre")
@@ -15,10 +16,8 @@ public class Rencontre {
     @Column(name = "nb_but_exterieur")
     private int nbButExterieur;
 
-    @ManyToOne
-    @JoinColumn(name = "id_arbitre")
-    private Arbitre arbitre;
-
+    @OneToMany(mappedBy = "rencontre")
+    private List<Arbitre>arbitres;
     @ManyToOne
     @JoinColumn(name = "id_exterieur")
     private Equipe equipeExterieure;
@@ -30,21 +29,26 @@ public class Rencontre {
     @ManyToOne
     @JoinColumn(name = "id_competition")
     private Competition competition;
+
+    @OneToMany (mappedBy ="rencontre",cascade=CascadeType.ALL)
+    private List<EvenementRencontre> evenementRencontres;
     //constructeurs
 
     public Rencontre() {
     }
 
-    public Rencontre(int idRencontre, int nbButDomicile, int nbButExterieur, Arbitre arbitre, Equipe equipeExterieure, Equipe equipeDomicile, Competition competition) {
+    public Rencontre(int idRencontre, int nbButDomicile, int nbButExterieur, List<Arbitre> arbitres, Equipe equipeExterieure, Equipe equipeDomicile, Competition competition, List<EvenementRencontre> evenementRencontres) {
         this.idRencontre = idRencontre;
         this.nbButDomicile = nbButDomicile;
         this.nbButExterieur = nbButExterieur;
-        this.arbitre = arbitre;
+        this.arbitres = arbitres;
         this.equipeExterieure = equipeExterieure;
         this.equipeDomicile = equipeDomicile;
         this.competition = competition;
+        this.evenementRencontres = evenementRencontres;
     }
-    // Getters and setters
+
+// Getters and setters
 
     public int getIdRencontre() {
         return idRencontre;
@@ -70,16 +74,25 @@ public class Rencontre {
         this.nbButExterieur = nbButExterieur;
     }
 
-    public Arbitre getArbitre() {
-        return arbitre;
-    }
-
-    public void setArbitre(Arbitre arbitre) {
-        this.arbitre = arbitre;
-    }
 
     public Equipe getEquipeExterieure() {
         return equipeExterieure;
+    }
+
+    public List<Arbitre> getArbitres() {
+        return arbitres;
+    }
+
+    public void setArbitres(List<Arbitre> arbitres) {
+        this.arbitres = arbitres;
+    }
+
+    public List<EvenementRencontre> getEvenementRencontres() {
+        return evenementRencontres;
+    }
+
+    public void setEvenementRencontres(List<EvenementRencontre> evenementRencontres) {
+        this.evenementRencontres = evenementRencontres;
     }
 
     public void setEquipeExterieure(Equipe equipeExterieure) {

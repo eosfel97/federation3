@@ -41,14 +41,14 @@ public class Club {
     @Column(name = "attestation_assurance", nullable = false, length = 50)
     private String attestationAssurance;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
 
     @OneToMany (mappedBy ="club",cascade=CascadeType.ALL)
     private List<Equipe> equipes;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_stade")
     private Stade stade;
     //constructeurs
@@ -56,7 +56,7 @@ public class Club {
     public Club() {
     }
 
-    public Club(int idClub, String nom, int numeroRue, String nomRue, String ville, int codePostal, Date dateCreation, String nomEtablissementEtat, String nomAssurance, String rib, String attestationAssurance, User user, Stade stade) {
+    public Club(int idClub, String nom, int numeroRue, String nomRue, String ville, int codePostal, Date dateCreation, String nomEtablissementEtat, String nomAssurance, String rib, String attestationAssurance, User user, List<Equipe> equipes, Stade stade) {
         this.idClub = idClub;
         this.nom = nom;
         this.numeroRue = numeroRue;
@@ -69,9 +69,11 @@ public class Club {
         this.rib = rib;
         this.attestationAssurance = attestationAssurance;
         this.user = user;
+        this.equipes = equipes;
         this.stade = stade;
     }
-        // getters and setters
+
+// getters and setters
 
     public int getIdClub() {
         return idClub;
@@ -175,5 +177,13 @@ public class Club {
 
     public void setStade(Stade stade) {
         this.stade = stade;
+    }
+
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
     }
 }

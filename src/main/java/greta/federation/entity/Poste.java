@@ -1,6 +1,8 @@
 package greta.federation.entity;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "poste")
 public class Poste {
@@ -12,17 +14,21 @@ public class Poste {
 
     @Column(name = "nom")
     private String nom;
+    @OneToMany (mappedBy ="poste",cascade=CascadeType.ALL)
+    private List<Joueur> joueurs;
 
     //constructeurs
 
     public Poste() {
     }
 
-    public Poste(Integer idPoste, String nom) {
+    public Poste(Integer idPoste, String nom, List<Joueur> joueurs) {
         this.idPoste = idPoste;
         this.nom = nom;
+        this.joueurs = joueurs;
     }
-    //getters and setters
+
+//getters and setters
 
     public Integer getIdPoste() {
         return idPoste;
@@ -38,5 +44,13 @@ public class Poste {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public List<Joueur> getJoueurs() {
+        return joueurs;
+    }
+
+    public void setJoueurs(List<Joueur> joueurs) {
+        this.joueurs = joueurs;
     }
 }

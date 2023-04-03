@@ -3,8 +3,8 @@ package greta.federation.entity;
 import javax.persistence.Table;
 import javax.persistence.*;
 @Entity
-@Table(name="image_article")
-public class ImageArticle {
+@Table(name="image")
+public class Image {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -20,16 +20,21 @@ public class ImageArticle {
     @JoinColumn(name="id_article")
     private Article article;
 
+    @ManyToOne
+    @JoinColumn(name="id_actualite")
+    private Actualite actualite;
+
     //constructeurs
 
-    public ImageArticle() {
+    public Image() {
     }
 
-    public ImageArticle(int idImageArticle, String nom, String description, Article article) {
+    public Image(int idImageArticle, String nom, String description, Article article, Actualite actualite) {
         this.idImageArticle = idImageArticle;
         this.nom = nom;
         this.description = description;
         this.article = article;
+        this.actualite = actualite;
     }
 
 // getters et setters
@@ -64,5 +69,13 @@ public class ImageArticle {
 
     public void setArticle(Article article) {
         this.article = article;
+    }
+
+    public Actualite getActualite() {
+        return actualite;
+    }
+
+    public void setActualite(Actualite actualite) {
+        this.actualite = actualite;
     }
 }

@@ -1,18 +1,13 @@
 package greta.federation.dto;
 
-import greta.federation.entity.User;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.util.List;
 
 public class RolesDto {
     private int idRoles;
     private String nom;
-    private List<User> users;
+    private List<UserDto> users;
 
-    // G and S
+    //Getters and Setters
 
 
     public int getIdRoles() {
@@ -31,11 +26,11 @@ public class RolesDto {
         this.nom = nom;
     }
 
-    public List<User> getUsers() {
+    public List<UserDto> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserDto> users) {
         this.users = users;
     }
 }

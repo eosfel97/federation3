@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import greta.federation.repository.ArticleRepository;
 import greta.federation.repository.CategorieRepository;
-import greta.federation.repository.ImageArticleRepository;
+import greta.federation.repository.ImageRepository;
 import greta.federation.entity.Categorie;
-import greta.federation.entity.ImageArticle;
+import greta.federation.entity.Image;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +31,7 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository ;
     @Autowired
-    private ImageArticleRepository imageArticleRepository;
+    private ImageRepository imageArticleRepository;
     @Autowired
     private CategorieRepository categorieRepository;
     @RequestMapping(value = "/index")
@@ -66,7 +66,7 @@ public class ArticleController {
         articleRepository.save(article);
 
         // Enregistrer les images dans le répertoire de stockage des images
-        List<ImageArticle> imageArticles = new ArrayList<>();
+        List<Image> imageArticles = new ArrayList<>();
         for (MultipartFile image : images) {
             // Vérifier que le fichier téléchargé est une image
             if (!image.getContentType().startsWith("image/")) {
@@ -83,7 +83,7 @@ public class ArticleController {
             Files.copy(image.getInputStream(), imagePath, StandardCopyOption.REPLACE_EXISTING);
 
             // Enregistrer le chemin d'accès à l'image dans une nouvelle entité ImageArticle
-            ImageArticle imageArticle = new ImageArticle();
+            Image imageArticle = new Image();
             imageArticle.setNom(filename);
             imageArticle.setArticle(article);
             imageArticleRepository.save(imageArticle);

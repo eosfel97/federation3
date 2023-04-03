@@ -1,7 +1,6 @@
 package greta.federation.dto;
 
-import greta.federation.entity.Equipe;
-import greta.federation.entity.Stade;
+
 import greta.federation.entity.User;
 
 import javax.persistence.*;
@@ -19,11 +18,12 @@ public class ClubDto {
     private String nomAssurance;
     private String rib;
     private String attestationAssurance;
-    private User user;
-    private List<Equipe> equipes;
-    private Stade stade;
+    private UserDto user;
+    private List<EquipeDto> equipes;
+    private StadeDto stade;
 
-    // g and S
+    //Getters and Setters
+
 
     public String getNom() {
         return nom;
@@ -105,27 +105,27 @@ public class ClubDto {
         this.attestationAssurance = attestationAssurance;
     }
 
-    public User getUser() {
+    public UserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDto user) {
         this.user = user;
     }
 
-    public List<Equipe> getEquipes() {
+    public List<EquipeDto> getEquipes() {
         return equipes;
     }
 
-    public void setEquipes(List<Equipe> equipes) {
+    public void setEquipes(List<EquipeDto> equipes) {
         this.equipes = equipes;
     }
 
-    public Stade getStade() {
+    public StadeDto getStade() {
         return stade;
     }
 
-    public void setStade(Stade stade) {
+    public void setStade(StadeDto stade) {
         this.stade = stade;
     }
 }

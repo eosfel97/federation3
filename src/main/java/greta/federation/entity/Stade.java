@@ -77,4 +77,5 @@ public class Stade {
     public void setClubs(List<Club> clubs) {
         this.clubs = clubs;
     }
+
 }

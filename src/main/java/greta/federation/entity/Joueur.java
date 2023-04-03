@@ -42,12 +42,16 @@ public class Joueur {
     @ManyToOne
     @JoinColumn(name = "id_equipe")
     private Equipe equipe;
+
+    @ManyToOne
+    @JoinColumn(name = "id_evenement_rencontre")
+    private EvenementRencontre evenementRencontre;
     //constructeurs
 
     public Joueur() {
     }
 
-    public Joueur(int idJoueur, String prenom, String nom, String poids, String taille, int nbBut, int nbPasseDecisive, int nbCartonJaune, int nbCartonRouge, int nbButEncaisse, Poste poste, Equipe equipe) {
+    public Joueur(int idJoueur, String prenom, String nom, String poids, String taille, int nbBut, int nbPasseDecisive, int nbCartonJaune, int nbCartonRouge, int nbButEncaisse, Poste poste, Equipe equipe, EvenementRencontre evenementRencontre) {
         this.idJoueur = idJoueur;
         this.prenom = prenom;
         this.nom = nom;
@@ -60,8 +64,10 @@ public class Joueur {
         this.nbButEncaisse = nbButEncaisse;
         this.poste = poste;
         this.equipe = equipe;
+        this.evenementRencontre = evenementRencontre;
     }
-    // Getters and setters
+
+// Getters and setters
 
     public int getIdJoueur() {
         return idJoueur;
@@ -157,5 +163,13 @@ public class Joueur {
 
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
+    }
+
+    public EvenementRencontre getEvenementRencontre() {
+        return evenementRencontre;
+    }
+
+    public void setEvenementRencontre(EvenementRencontre evenementRencontre) {
+        this.evenementRencontre = evenementRencontre;
     }
 }

@@ -2,15 +2,14 @@ package greta.federation.dto;
 
 import greta.federation.entity.CategorieFootball;
 import greta.federation.entity.Rencontre;
+import greta.federation.entity.TypeCompetition;
+import java.util.List;
 
-
-
-public class ArbitreDto {
+public class CompetitionDto {
     private String nom;
-    private String prenom;
+    private TypeCompetitionDto typeCompetition;
     private CategorieFootballDto categorieFootball;
-    private RencontreDto rencontre;
-
+    private List<RencontreDto> rencontres;
     //Getters and Setters
 
     public String getNom() {
@@ -21,14 +20,13 @@ public class ArbitreDto {
         this.nom = nom;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public TypeCompetitionDto getTypeCompetition() {
+        return typeCompetition;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setTypeCompetition(TypeCompetitionDto typeCompetition) {
+        this.typeCompetition = typeCompetition;
     }
-
 
     public CategorieFootballDto getCategorieFootball() {
         return categorieFootball;
@@ -38,11 +36,11 @@ public class ArbitreDto {
         this.categorieFootball = categorieFootball;
     }
 
-    public RencontreDto getRencontre() {
-        return rencontre;
+    public List<RencontreDto> getRencontres() {
+        return rencontres;
     }
 
-    public void setRencontre(RencontreDto rencontre) {
-        this.rencontre = rencontre;
+    public void setRencontres(List<RencontreDto> rencontres) {
+        this.rencontres = rencontres;
     }
 }

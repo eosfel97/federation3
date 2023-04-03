@@ -16,9 +16,13 @@ public class Arbitre {
     @Column(name = "prenom")
     private String prenom;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_categorie_football")
     private CategorieFootball categorieFootball;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rencontre")
+    private Rencontre rencontre;
     // constructeurs
 
     public Arbitre() {

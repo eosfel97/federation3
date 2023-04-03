@@ -9,7 +9,7 @@ public class ArticleDto {
     private double prix;
     private int quantite;
     private CategorieDto categorie;
-    private List<ImageArticleDto> images;
+    private List<ImageDto> images;
     //Getter and Setter
 
     public String getNom() {
@@ -52,11 +52,11 @@ public class ArticleDto {
         this.categorie = categorie;
     }
 
-    public List<ImageArticleDto> getImages() {
+    public List<ImageDto> getImages() {
         return images;
     }
 
-    public void setImages(List<ImageArticleDto> images) {
+    public void setImages(List<ImageDto> images) {
         this.images = images;
     }
 }

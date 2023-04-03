@@ -1,10 +1,10 @@
 package greta.federation.dto;
 
-public class ImageArticleDto {
+public class ImageDto {
     private String nom;
     private String description;
     private ArticleDto article;
-    // GG and SS
+    //Getters and Setters
 
     public String getNom() {
         return nom;

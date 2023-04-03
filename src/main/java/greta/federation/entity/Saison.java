@@ -1,6 +1,7 @@
 package greta.federation.entity;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "saison")
@@ -37,8 +38,11 @@ public class Saison {
     @Column(name = "nb_carton_rouge")
     private int nbCartonRouge;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_competition", referencedColumnName = "id_competition")
+    @OneToMany(mappedBy = "saison", cascade=CascadeType.ALL)
+    private List<Equipe> equipes;
+
+    @ManyToOne
+    @JoinColumn(name = "id_competition")
     private Competition competition;
 
     //constructeurs
@@ -46,7 +50,7 @@ public class Saison {
     public Saison() {
     }
 
-    public Saison(int idSaison, Date annee, int nbBut, int nbEncaisse, String meilleurJoueur, String meilleurButeur, String meilleurPasseur, String meilleurGardien, int nbCartonJaune, int nbCartonRouge, Competition competition) {
+    public Saison(int idSaison, Date annee, int nbBut, int nbEncaisse, String meilleurJoueur, String meilleurButeur, String meilleurPasseur, String meilleurGardien, int nbCartonJaune, int nbCartonRouge, List<Equipe> equipes, Competition competition) {
         this.idSaison = idSaison;
         this.annee = annee;
         this.nbBut = nbBut;
@@ -57,9 +61,10 @@ public class Saison {
         this.meilleurGardien = meilleurGardien;
         this.nbCartonJaune = nbCartonJaune;
         this.nbCartonRouge = nbCartonRouge;
+        this.equipes = equipes;
         this.competition = competition;
     }
-    // getters and setters
+// getters and setters
 
     public int getIdSaison() {
         return idSaison;
@@ -147,5 +152,13 @@ public class Saison {
 
     public void setCompetition(Competition competition) {
         this.competition = competition;
+    }
+
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
     }
 }

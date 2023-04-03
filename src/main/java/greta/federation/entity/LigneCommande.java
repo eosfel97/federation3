@@ -2,6 +2,8 @@ package greta.federation.entity;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name="ligne_commande")
 public class LigneCommande {
@@ -17,7 +19,10 @@ public class LigneCommande {
     @Column(name="prix_unitaire")
     private double prixUnitaire;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name="id_commande")
+    private Commande commande;
+    @ManyToOne
     @JoinColumn(name="id_article")
     private Article article;
 
@@ -26,12 +31,14 @@ public class LigneCommande {
     public LigneCommande() {
     }
 
-    public LigneCommande(int idLigneCommande, int quantite, double prixUnitaire, Article article) {
+    public LigneCommande(int idLigneCommande, int quantite, double prixUnitaire, Commande commande, Article article) {
         this.idLigneCommande = idLigneCommande;
         this.quantite = quantite;
         this.prixUnitaire = prixUnitaire;
+        this.commande = commande;
         this.article = article;
     }
+
 // getters et setters
 
     public int getIdLigneCommande() {
@@ -64,5 +71,13 @@ public class LigneCommande {
 
     public void setArticle(Article article) {
         this.article = article;
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 }

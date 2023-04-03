@@ -2,6 +2,8 @@ package greta.federation.entity;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "categorie_football")
 public class CategorieFootball {
@@ -25,21 +27,29 @@ public class CategorieFootball {
 
     @Column(name = "nb_mi_temps_rencontre")
     private Short nbMiTempsRencontre;
+    @OneToMany(mappedBy = "categorieFootball")
+    private List<Equipe> equipes;
+
+    @OneToMany(mappedBy = "categorieFootball")
+    private List<Competition> competitions;
 
     //constructeurs
 
     public CategorieFootball() {
     }
 
-    public CategorieFootball(Integer idCategorieFootball, String nom, Integer nbJoueursMaxEquipe, String nbRemplacantEquipe, Integer nbMinuteRencontre, Short nbMiTempsRencontre) {
+    public CategorieFootball(Integer idCategorieFootball, String nom, Integer nbJoueursMaxEquipe, String nbRemplacantEquipe, Integer nbMinuteRencontre, Short nbMiTempsRencontre, List<Equipe> equipes, List<Competition> competitions) {
         this.idCategorieFootball = idCategorieFootball;
         this.nom = nom;
         this.nbJoueursMaxEquipe = nbJoueursMaxEquipe;
         this.nbRemplacantEquipe = nbRemplacantEquipe;
         this.nbMinuteRencontre = nbMinuteRencontre;
         this.nbMiTempsRencontre = nbMiTempsRencontre;
+        this.equipes = equipes;
+        this.competitions = competitions;
     }
-    //getters and setters
+
+//getters and setters
 
     public Integer getIdCategorieFootball() {
         return idCategorieFootball;
@@ -87,5 +97,21 @@ public class CategorieFootball {
 
     public void setNbMiTempsRencontre(Short nbMiTempsRencontre) {
         this.nbMiTempsRencontre = nbMiTempsRencontre;
+    }
+
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
+    }
+
+    public List<Competition> getCompetitions() {
+        return competitions;
+    }
+
+    public void setCompetitions(List<Competition> competitions) {
+        this.competitions = competitions;
     }
 }

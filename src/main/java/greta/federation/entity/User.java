@@ -3,6 +3,8 @@ package greta.federation.entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name="Users")
 public class User {
@@ -26,22 +28,28 @@ public class User {
 
     @Column(name="identifiant")
     private String identifiant;
-
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-            message = "mot de passe doit contenir au minimum 8 caracteres dont 1 maj, 1 min, 1 chiffre et 1 caractere spécial(@$!%*?&)")
     @Column(name="password",nullable = false, length = 255)
     private String password;
+    @Embedded
+    private Adresse adresse;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "id_role")
     private Roles roles;
+
+    @OneToMany (mappedBy ="user",cascade=CascadeType.ALL)
+    private List<Commande> commandes;
+
+    @ManyToOne
+    @JoinColumn(name = "id_equipe")
+    private Equipe equipe;
 
     //constructeurs
 
     public User() {
     }
 
-    public User(int idUser, String nom, String prenom, String email, String portable, String identifiant, String password, Roles roles) {
+    public User(int idUser, String nom, String prenom, String email, String portable, String identifiant, String password, Adresse adresse, Roles roles, List<Commande> commandes, Equipe equipe) {
         this.idUser = idUser;
         this.nom = nom;
         this.prenom = prenom;
@@ -49,8 +57,12 @@ public class User {
         this.portable = portable;
         this.identifiant = identifiant;
         this.password = password;
+        this.adresse = adresse;
         this.roles = roles;
+        this.commandes = commandes;
+        this.equipe = equipe;
     }
+
 // getters et setters
 
     public int getIdUser() {
@@ -116,4 +128,29 @@ public class User {
     public void setRoles(Roles roles) {
         this.roles = roles;
     }
+
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+
 }

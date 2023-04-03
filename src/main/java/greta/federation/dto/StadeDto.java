@@ -1,18 +1,15 @@
 package greta.federation.dto;
 
-import greta.federation.entity.Club;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 public class StadeDto {
     private String nom;
     private Integer nbPlaces;
     private String typeTerrain;
-    private List<Club> clubs;
-    // G and S
+    private List<ClubDto> clubs;
+
+    //Getters and Setters
+
 
     public String getNom() {
         return nom;
@@ -38,11 +35,11 @@ public class StadeDto {
         this.typeTerrain = typeTerrain;
     }
 
-    public List<Club> getClubs() {
+    public List<ClubDto> getClubs() {
         return clubs;
     }
 
-    public void setClubs(List<Club> clubs) {
+    public void setClubs(List<ClubDto> clubs) {
         this.clubs = clubs;
     }
 }
