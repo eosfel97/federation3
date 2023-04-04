@@ -32,7 +32,7 @@ public class User {
     @Column(name="password",nullable = false, length = 255)
     private String password;
 
-    @OneToMany(mappedBy ="roles",cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.ALL)
     private Roles roles;
 
     //constructeurs
