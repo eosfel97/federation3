@@ -1,62 +1,58 @@
 package greta.federation.dto;
 
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import greta.federation.entity.Article;
+import greta.federation.entity.LigneCommande;
+import lombok.Builder;
+import lombok.Data;
 
+
+import java.math.BigDecimal;
+import java.util.List;
+@Data
+@Builder
 public class ArticleDto {
+
+    private Integer id;
     private String nom;
     private String description;
-    private double prix;
-    private int quantite;
+    private BigDecimal prix;
+    private BigDecimal quantite;
     private CategorieDto categorie;
-    private List<ImageArticleDto> images;
-    //Getter and Setter
+    @JsonIgnore
+    private List<LigneCommande> ligneCommande;
+    @JsonIgnore
+    private List<ImageDto> images;
 
-    public String getNom() {
-        return nom;
+
+    public static ArticleDto fromEntity(Article article){
+
+        if(article == null) {
+            return  null ;
+            // TODO throw an exception
+        }
+        return  ArticleDto.builder()
+                .id(article.getId())
+                .prix(article.getPrix())
+                .nom(article.getNom())
+                .description(article.getDescription())
+                .quantite(article.getQuantite())
+                .categorie(CategorieDto.fromEntity(article.getCategorie()))
+                .build();
+    }
+    public static Article toEntity(ArticleDto articleDto) {
+        if (articleDto == null) {
+            return null;
+        }
+        Article article = new Article();
+
+        article.setId(articleDto.getId());
+        article.setNom(articleDto.getNom());
+        article.setPrix(articleDto.getPrix());
+        article.setQuantite(articleDto.getQuantite());
+        article.setCategorie(CategorieDto.toEntity(articleDto.getCategorie()));
+        return article;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
-
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
-
-    public CategorieDto getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(CategorieDto categorie) {
-        this.categorie = categorie;
-    }
-
-    public List<ImageArticleDto> getImages() {
-        return images;
-    }
-
-    public void setImages(List<ImageArticleDto> images) {
-        this.images = images;
-    }
 }

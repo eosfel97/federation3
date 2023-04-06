@@ -1,14 +1,19 @@
 package greta.federation.entity;
 
-import javax.persistence.*;
-@Entity
-@Table(name = "stade")
-public class Stade {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_stade")
-    private Integer idStade;
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "stade")
+public class Stade extends AbstractEntity {
+
 
     @Column(name = "nom")
     private String nom;
@@ -18,48 +23,9 @@ public class Stade {
 
     @Column(name = "type_terrain")
     private String typeTerrain;
-    //constructeurs
 
-    public Stade() {
-    }
+    @OneToMany (mappedBy ="stade",cascade=CascadeType.ALL)
+    private List<Club> clubs;
 
-    public Stade(Integer idStade, String nom, Integer nbPlaces, String typeTerrain) {
-        this.idStade = idStade;
-        this.nom = nom;
-        this.nbPlaces = nbPlaces;
-        this.typeTerrain = typeTerrain;
-    }
-    //getters and setters
 
-    public Integer getIdStade() {
-        return idStade;
-    }
-
-    public void setIdStade(Integer idStade) {
-        this.idStade = idStade;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Integer getNbPlaces() {
-        return nbPlaces;
-    }
-
-    public void setNbPlaces(Integer nbPlaces) {
-        this.nbPlaces = nbPlaces;
-    }
-
-    public String getTypeTerrain() {
-        return typeTerrain;
-    }
-
-    public void setTypeTerrain(String typeTerrain) {
-        this.typeTerrain = typeTerrain;
-    }
 }

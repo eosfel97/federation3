@@ -1,16 +1,21 @@
 package greta.federation.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 import javax.persistence.*;
-@Entity
-@Table(name="Users")
-public class User {
+import java.util.List;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_user")
-    private int idUser;
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="Users")
+public class User extends AbstractEntity {
+
+
 
     @Column(name="nom")
     private String nom;
@@ -26,93 +31,22 @@ public class User {
 
     @Column(name="identifiant")
     private String identifiant;
-
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-            message = "mot de passe doit contenir au minimum 8 caracteres dont 1 maj, 1 min, 1 chiffre et 1 caractere spécial(@$!%*?&)")
     @Column(name="password",nullable = false, length = 255)
     private String password;
+    @Embedded
+    private Adresse adresse;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    private Roles roles;
+    @OneToMany (mappedBy ="user",cascade=CascadeType.ALL)
+    @JsonIgnore
+    private List<Roles> roles;
 
-    //constructeurs
+    @OneToMany (mappedBy ="user",cascade=CascadeType.ALL)
+    private List<Commande> commandes;
 
-    public User() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_equipe")
+    private Equipe equipe;
 
-    public User(int idUser, String nom, String prenom, String email, String portable, String identifiant, String password, Roles roles) {
-        this.idUser = idUser;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.portable = portable;
-        this.identifiant = identifiant;
-        this.password = password;
-        this.roles = roles;
-    }
-// getters et setters
 
-    public int getIdUser() {
-        return idUser;
-    }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPortable() {
-        return portable;
-    }
-
-    public void setPortable(String portable) {
-        this.portable = portable;
-    }
-
-    public String getIdentifiant() {
-        return identifiant;
-    }
-
-    public void setIdentifiant(String identifiant) {
-        this.identifiant = identifiant;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
-    }
 }
