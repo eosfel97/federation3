@@ -1,6 +1,14 @@
 package greta.federation.dto;
 
+import greta.federation.entity.Image;
+import greta.federation.entity.Joueur;
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class JoueurDto {
+    private Integer id;
     private String prenom;
     private String nom;
     private String poids;
@@ -13,101 +21,48 @@ public class JoueurDto {
     private PosteDto poste;
     private EquipeDto equipe;
     private EvenementRencontreDto evenementRencontre;
-    //Getters and Setters
 
-    public String getPrenom() {
-        return prenom;
+    public static JoueurDto fromEntity(Joueur joueur) {
+        if (joueur == null) {
+            return null;
+        }
+        return JoueurDto.builder()
+                .id(joueur.getId())
+                .nom(joueur.getNom())
+                .prenom(joueur.getPrenom())
+                .poids(joueur.getPoids())
+                .taille(joueur.getTaille())
+                .nbBut(joueur.getNbBut())
+                .nbPasseDecisive(joueur.getNbPasseDecisive())
+                .nbCartonJaune(joueur.getNbCartonJaune())
+                .nbCartonRouge(joueur.getNbCartonRouge())
+                .nbButEncaisse(joueur.getNbButEncaisse())
+                .poste(PosteDto.fromEntity(joueur.getPoste()))
+                .equipe(EquipeDto.fromEntity(joueur.getEquipe()))
+                .evenementRencontre(EvenementRencontreDto.fromEntity(joueur.getEvenementRencontre()))
+                .build();
+    }
+    public static Joueur toEntity(JoueurDto joueurDto) {
+        if (joueurDto == null) {
+            return null;
+        }
+        Joueur joueur = new Joueur();
+
+                joueur.setId(joueurDto.getId());
+                joueur.setNom(joueurDto.getNom());
+                joueur.setPrenom(joueurDto.getPrenom());
+                joueur.setPoids(joueurDto.getPoids());
+                joueur.setTaille(joueurDto.getTaille());
+                joueur.setNbBut(joueurDto.getNbBut());
+                joueur.setNbPasseDecisive(joueurDto.getNbPasseDecisive());
+                joueur.setNbCartonJaune(joueurDto.getNbCartonJaune());
+                joueur.setNbCartonRouge(joueurDto.getNbCartonRouge());
+                joueur.setNbButEncaisse(joueurDto.getNbButEncaisse());
+                joueur.setPoste(PosteDto.toEntity(joueurDto.getPoste()));
+                joueur.setEquipe(EquipeDto.toEntity(joueurDto.getEquipe()));
+                joueur.setEvenementRencontre(EvenementRencontreDto.toEntity(joueurDto.getEvenementRencontre()));
+
+                         return joueur;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPoids() {
-        return poids;
-    }
-
-    public void setPoids(String poids) {
-        this.poids = poids;
-    }
-
-    public String getTaille() {
-        return taille;
-    }
-
-    public void setTaille(String taille) {
-        this.taille = taille;
-    }
-
-    public int getNbBut() {
-        return nbBut;
-    }
-
-    public void setNbBut(int nbBut) {
-        this.nbBut = nbBut;
-    }
-
-    public int getNbPasseDecisive() {
-        return nbPasseDecisive;
-    }
-
-    public void setNbPasseDecisive(int nbPasseDecisive) {
-        this.nbPasseDecisive = nbPasseDecisive;
-    }
-
-    public int getNbCartonJaune() {
-        return nbCartonJaune;
-    }
-
-    public void setNbCartonJaune(int nbCartonJaune) {
-        this.nbCartonJaune = nbCartonJaune;
-    }
-
-    public int getNbCartonRouge() {
-        return nbCartonRouge;
-    }
-
-    public void setNbCartonRouge(int nbCartonRouge) {
-        this.nbCartonRouge = nbCartonRouge;
-    }
-
-    public int getNbButEncaisse() {
-        return nbButEncaisse;
-    }
-
-    public void setNbButEncaisse(int nbButEncaisse) {
-        this.nbButEncaisse = nbButEncaisse;
-    }
-
-    public PosteDto getPoste() {
-        return poste;
-    }
-
-    public void setPoste(PosteDto poste) {
-        this.poste = poste;
-    }
-
-    public EquipeDto getEquipe() {
-        return equipe;
-    }
-
-    public void setEquipe(EquipeDto equipe) {
-        this.equipe = equipe;
-    }
-
-    public EvenementRencontreDto getEvenementRencontre() {
-        return evenementRencontre;
-    }
-
-    public void setEvenementRencontre(EvenementRencontreDto evenementRencontre) {
-        this.evenementRencontre = evenementRencontre;
-    }
 }

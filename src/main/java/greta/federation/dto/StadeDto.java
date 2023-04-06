@@ -1,45 +1,44 @@
 package greta.federation.dto;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import greta.federation.entity.Poste;
+import greta.federation.entity.Stade;
+import lombok.Builder;
+import lombok.Data;
 
+import java.util.List;
+@Data
+@Builder
 public class StadeDto {
+    private Integer id;
     private String nom;
     private Integer nbPlaces;
     private String typeTerrain;
+    @JsonIgnore
     private List<ClubDto> clubs;
 
-    //Getters and Setters
-
-
-    public String getNom() {
-        return nom;
+    public static StadeDto fromEntity(Stade stade) {
+        if (stade == null) {
+            return null;
+        }
+        return StadeDto.builder()
+                .id(stade.getId())
+                .nom(stade.getNom())
+                .nbPlaces(stade.getNbPlaces())
+                .typeTerrain(stade.getTypeTerrain())
+                .build();
     }
+    public static Stade toEntity(StadeDto stadeDto) {
+        if (stadeDto == null) {
+            return null;
+        }
+        Stade stade = new Stade();
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+        stade.setId(stadeDto.getId());
+        stade.setNom(stadeDto.getNom());
+        stade.setNbPlaces(stadeDto.getNbPlaces());
+        stade.setTypeTerrain(stadeDto.getTypeTerrain());
 
-    public Integer getNbPlaces() {
-        return nbPlaces;
-    }
-
-    public void setNbPlaces(Integer nbPlaces) {
-        this.nbPlaces = nbPlaces;
-    }
-
-    public String getTypeTerrain() {
-        return typeTerrain;
-    }
-
-    public void setTypeTerrain(String typeTerrain) {
-        this.typeTerrain = typeTerrain;
-    }
-
-    public List<ClubDto> getClubs() {
-        return clubs;
-    }
-
-    public void setClubs(List<ClubDto> clubs) {
-        this.clubs = clubs;
+        return stade;
     }
 }

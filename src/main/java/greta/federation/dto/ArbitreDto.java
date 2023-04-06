@@ -1,48 +1,47 @@
 package greta.federation.dto;
 
-import greta.federation.entity.CategorieFootball;
-import greta.federation.entity.Rencontre;
+import greta.federation.entity.Arbitre;
+import lombok.Builder;
+import lombok.Data;
 
 
-
+@Data
+@Builder
 public class ArbitreDto {
+    private Integer id;
     private String nom;
     private String prenom;
     private CategorieFootballDto categorieFootball;
     private RencontreDto rencontre;
-
-    //Getters and Setters
-
-    public String getNom() {
-        return nom;
+    public static ArbitreDto fromEntity(Arbitre arbitre) {
+        if (arbitre == null) {
+            return null;
+            // TODO throw an exception
+        }
+        return ArbitreDto.builder()
+                .id(arbitre.getId())
+                .nom(arbitre.getNom())
+                .prenom(arbitre.getPrenom())
+                .categorieFootball(CategorieFootballDto.fromEntity(arbitre.getCategorieFootball()))
+                .rencontre(RencontreDto.fromEntity(arbitre.getRencontre()))
+                .build();
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public static Arbitre toEntity(ArbitreDto arbitreDto) {
+        if (arbitreDto == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        Arbitre arbitre = new Arbitre();
+        arbitre.setId(arbitreDto.getId());
+        arbitre.setNom(arbitreDto.getNom());
+        arbitre.setPrenom(arbitreDto.getPrenom());
+        arbitre.setCategorieFootball(CategorieFootballDto.toEntity(arbitreDto.getCategorieFootball()));
+        arbitre.setRencontre(RencontreDto.toEntity(arbitreDto.getRencontre()));
+
+        return arbitre;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-
-    public CategorieFootballDto getCategorieFootball() {
-        return categorieFootball;
-    }
-
-    public void setCategorieFootball(CategorieFootballDto categorieFootball) {
-        this.categorieFootball = categorieFootball;
-    }
-
-    public RencontreDto getRencontre() {
-        return rencontre;
-    }
-
-    public void setRencontre(RencontreDto rencontre) {
-        this.rencontre = rencontre;
-    }
 }

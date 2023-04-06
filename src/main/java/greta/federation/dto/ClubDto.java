@@ -1,131 +1,66 @@
 package greta.federation.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import greta.federation.entity.Article;
+import greta.federation.entity.Club;
 import greta.federation.entity.User;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
+@Data
+@Builder
 public class ClubDto {
+    private Integer id;
     private String nom;
-    private int numeroRue;
-    private String nomRue;
-    private String ville;
-    private int codePostal;
     private Date dateCreation;
     private String nomEtablissementEtat;
     private String nomAssurance;
     private String rib;
     private String attestationAssurance;
     private UserDto user;
+    @JsonIgnore
     private List<EquipeDto> equipes;
     private StadeDto stade;
+    private AdresseDto adresse;
 
-    //Getters and Setters
+    public static ClubDto fromEntity(Club club){
 
-
-    public String getNom() {
-        return nom;
+        if(club == null) {
+            return  null ;
+            // TODO throw an exception
+        }
+        return  ClubDto.builder()
+                .id(club.getId())
+                .nom(club.getNom())
+                .dateCreation(club.getDateCreation())
+                .nomEtablissementEtat(club.getNomEtablissementEtat())
+                .nomAssurance(club.getNomAssurance())
+                .rib(club.getRib())
+                .attestationAssurance(club.getAttestationAssurance())
+                .user(UserDto.fromEntity(club.getUser()))
+                .stade(StadeDto.fromEntity(club.getStade()))
+                .adresse(AdresseDto.fromEntity(club.getAdresse()))
+                .build();
     }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public int getNumeroRue() {
-        return numeroRue;
-    }
-
-    public void setNumeroRue(int numeroRue) {
-        this.numeroRue = numeroRue;
-    }
-
-    public String getNomRue() {
-        return nomRue;
-    }
-
-    public void setNomRue(String nomRue) {
-        this.nomRue = nomRue;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public int getCodePostal() {
-        return codePostal;
-    }
-
-    public void setCodePostal(int codePostal) {
-        this.codePostal = codePostal;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public String getNomEtablissementEtat() {
-        return nomEtablissementEtat;
-    }
-
-    public void setNomEtablissementEtat(String nomEtablissementEtat) {
-        this.nomEtablissementEtat = nomEtablissementEtat;
-    }
-
-    public String getNomAssurance() {
-        return nomAssurance;
-    }
-
-    public void setNomAssurance(String nomAssurance) {
-        this.nomAssurance = nomAssurance;
-    }
-
-    public String getRib() {
-        return rib;
-    }
-
-    public void setRib(String rib) {
-        this.rib = rib;
-    }
-
-    public String getAttestationAssurance() {
-        return attestationAssurance;
-    }
-
-    public void setAttestationAssurance(String attestationAssurance) {
-        this.attestationAssurance = attestationAssurance;
-    }
-
-    public UserDto getUser() {
-        return user;
-    }
-
-    public void setUser(UserDto user) {
-        this.user = user;
-    }
-
-    public List<EquipeDto> getEquipes() {
-        return equipes;
-    }
-
-    public void setEquipes(List<EquipeDto> equipes) {
-        this.equipes = equipes;
-    }
-
-    public StadeDto getStade() {
-        return stade;
-    }
-
-    public void setStade(StadeDto stade) {
-        this.stade = stade;
+    public static Club toEntity(ClubDto clubDto) {
+        if (clubDto == null) {
+            return null;
+        }
+        Club club = new Club();
+        club.setId(clubDto.getId());
+        club.setNom(clubDto.getNom());
+        club.setDateCreation(clubDto.getDateCreation());
+        club.setNomEtablissementEtat(clubDto.getNomEtablissementEtat());
+        club.setNomAssurance(clubDto.getNomAssurance());
+        club.setRib(clubDto.getRib());
+        club.setAttestationAssurance(clubDto.getAttestationAssurance());
+        club.setUser(UserDto.toEntity(clubDto.getUser()));
+        club.setStade(StadeDto.toEntity(clubDto.getStade()));
+        club.setAdresse(AdresseDto.toEntity(clubDto.getAdresse()));
+        return club;
     }
 }

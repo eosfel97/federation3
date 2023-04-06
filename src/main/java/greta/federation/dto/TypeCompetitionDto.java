@@ -2,26 +2,39 @@ package greta.federation.dto;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import greta.federation.entity.TypeCompetition;
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.List;
-
+@Data
+@Builder
 public class TypeCompetitionDto {
+    private Integer id;
     private String nom;
+    @JsonIgnore
     private List<CompetitionDto> competitions;
-    //Getters and Setters
+    public static TypeCompetitionDto fromEntity(TypeCompetition typeCompetition) {
+        if (typeCompetition == null) {
+            return null;
+        }
+        return TypeCompetitionDto.builder()
+                .id(typeCompetition.getId())
+                .nom(typeCompetition.getNom())
+                .build();
+    }
+    public static TypeCompetition toEntity(TypeCompetitionDto typeCompetitionDto) {
+        if (typeCompetitionDto == null) {
+            return null;
+        }
+        TypeCompetition typeCompetition = new TypeCompetition();
 
-    public String getNom() {
-        return nom;
+        typeCompetition.setId(typeCompetitionDto.getId());
+        typeCompetition.setNom(typeCompetitionDto.getNom());
+
+
+        return typeCompetition;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public List<CompetitionDto> getCompetitions() {
-        return competitions;
-    }
-
-    public void setCompetitions(List<CompetitionDto> competitions) {
-        this.competitions = competitions;
-    }
 }

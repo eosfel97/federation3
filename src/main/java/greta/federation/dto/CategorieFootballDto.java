@@ -1,73 +1,57 @@
 package greta.federation.dto;
 
-import greta.federation.entity.Competition;
-import greta.federation.entity.Equipe;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import greta.federation.entity.CategorieFootball;
+
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.List;
-
+@Data
+@Builder
 public class CategorieFootballDto {
+    private Integer id;
     private String nom;
     private Integer nbJoueursMaxEquipe;
     private String nbRemplacantEquipe;
     private Integer nbMinuteRencontre;
     private Short nbMiTempsRencontre;
+    @JsonIgnore
     private List<EquipeDto> equipes;
+    @JsonIgnore
     private List<CompetitionDto> competitions;
-    //Getters and Setters
 
-    public String getNom() {
-        return nom;
+    public static CategorieFootballDto fromEntity(CategorieFootball categorieFootball) {
+        if (categorieFootball == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        return CategorieFootballDto.builder()
+                .id(categorieFootball.getId())
+                .nom(categorieFootball.getNom())
+                .nbJoueursMaxEquipe(categorieFootball.getNbJoueursMaxEquipe())
+                .nbRemplacantEquipe(categorieFootball.getNbRemplacantEquipe())
+                .nbMinuteRencontre(categorieFootball.getNbMinuteRencontre())
+                .nbMiTempsRencontre(categorieFootball.getNbMiTempsRencontre())
+                .build();
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public static CategorieFootball toEntity(CategorieFootballDto categorieFootballDto) {
+        if (categorieFootballDto == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        CategorieFootball categorieFootball = new CategorieFootball();
+        categorieFootball.setId(categorieFootballDto.getId());
+        categorieFootball.setNom(categorieFootballDto.getNom());
+        categorieFootball.setNbJoueursMaxEquipe(categorieFootball.getNbJoueursMaxEquipe());
+        categorieFootball.setNbRemplacantEquipe(categorieFootball.getNbRemplacantEquipe());
+        categorieFootball.setNbMinuteRencontre(categorieFootball.getNbMinuteRencontre());
+        categorieFootball.setNbMiTempsRencontre(categorieFootball.getNbMiTempsRencontre());
+
+        return categorieFootball;
     }
 
-    public Integer getNbJoueursMaxEquipe() {
-        return nbJoueursMaxEquipe;
-    }
-
-    public void setNbJoueursMaxEquipe(Integer nbJoueursMaxEquipe) {
-        this.nbJoueursMaxEquipe = nbJoueursMaxEquipe;
-    }
-
-    public String getNbRemplacantEquipe() {
-        return nbRemplacantEquipe;
-    }
-
-    public void setNbRemplacantEquipe(String nbRemplacantEquipe) {
-        this.nbRemplacantEquipe = nbRemplacantEquipe;
-    }
-
-    public Integer getNbMinuteRencontre() {
-        return nbMinuteRencontre;
-    }
-
-    public void setNbMinuteRencontre(Integer nbMinuteRencontre) {
-        this.nbMinuteRencontre = nbMinuteRencontre;
-    }
-
-    public Short getNbMiTempsRencontre() {
-        return nbMiTempsRencontre;
-    }
-
-    public void setNbMiTempsRencontre(Short nbMiTempsRencontre) {
-        this.nbMiTempsRencontre = nbMiTempsRencontre;
-    }
-
-    public List<EquipeDto> getEquipes() {
-        return equipes;
-    }
-
-    public void setEquipes(List<EquipeDto> equipes) {
-        this.equipes = equipes;
-    }
-
-    public List<CompetitionDto> getCompetitions() {
-        return competitions;
-    }
-
-    public void setCompetitions(List<CompetitionDto> competitions) {
-        this.competitions = competitions;
-    }
 }

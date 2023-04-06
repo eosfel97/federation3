@@ -1,15 +1,17 @@
 package greta.federation.dto;
 
-import greta.federation.entity.Adresse;
-import greta.federation.entity.Commande;
-import greta.federation.entity.Equipe;
-import greta.federation.entity.Roles;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import greta.federation.entity.*;
+import lombok.Builder;
+import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Data
+@Builder
 public class UserDto {
+    private Integer id;
 
     private String nom;
     private String prenom;
@@ -18,88 +20,51 @@ public class UserDto {
     private String identifiant;
     private String password;
     private AdresseDto adresse;
-    private RolesDto roles;
+
+    private List<RolesDto> roles;
+    @JsonIgnore
     private List<CommandeDto> commandes;
     private EquipeDto equipe;
-    //Getters and Setters
 
-    public String getNom() {
-        return nom;
+    public static UserDto fromEntity(User user) {
+        if (user == null) {
+            return null;
+        }
+        return UserDto.builder()
+                .id(user.getId())
+                .nom(user.getNom())
+                .prenom(user.getPrenom())
+                .portable(user.getPortable())
+                .email(user.getEmail())
+                .identifiant(user.getIdentifiant())
+                .password(user.getPassword())
+                .adresse(AdresseDto.fromEntity(user.getAdresse()))
+                .equipe(EquipeDto.fromEntity(user.getEquipe()))
+                .roles(
+                        user.getRoles() != null ?
+                                user.getRoles().stream()
+                                        .map(RolesDto::fromEntity)
+                                        .collect(Collectors.toList()) : null
+                )
+                .build();
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public static User toEntity(UserDto userDto) {
+        if (userDto == null) {
+            return null;
+        }
+        User user = new User();
+        user.setId(userDto.getId());
+        user.setNom(userDto.getNom());
+        user.setPrenom(userDto.getPrenom());
+        user.setEmail(userDto.getEmail());
+        user.setPortable(userDto.getPortable());
+        user.setIdentifiant(userDto.getIdentifiant());
+        user.setPassword(userDto.getPassword());
+        user.setAdresse(AdresseDto.toEntity(userDto.getAdresse()));
+        user.setEquipe(EquipeDto.toEntity(userDto.getEquipe()));
+
+        return user;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPortable() {
-        return portable;
-    }
-
-    public void setPortable(String portable) {
-        this.portable = portable;
-    }
-
-    public String getIdentifiant() {
-        return identifiant;
-    }
-
-    public void setIdentifiant(String identifiant) {
-        this.identifiant = identifiant;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public AdresseDto getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(AdresseDto adresse) {
-        this.adresse = adresse;
-    }
-
-    public RolesDto getRoles() {
-        return roles;
-    }
-
-    public void setRoles(RolesDto roles) {
-        this.roles = roles;
-    }
-
-    public List<CommandeDto> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<CommandeDto> commandes) {
-        this.commandes = commandes;
-    }
-
-    public EquipeDto getEquipe() {
-        return equipe;
-    }
-
-    public void setEquipe(EquipeDto equipe) {
-        this.equipe = equipe;
-    }
 }

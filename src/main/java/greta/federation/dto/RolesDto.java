@@ -1,36 +1,37 @@
 package greta.federation.dto;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import greta.federation.entity.Roles;
+import lombok.Builder;
+import lombok.Data;
 
+
+@Data
+@Builder
 public class RolesDto {
-    private int idRoles;
+    private Integer id;
     private String nom;
-    private List<UserDto> users;
+    @JsonIgnore
+    private UserDto user;
 
-    //Getters and Setters
-
-
-    public int getIdRoles() {
-        return idRoles;
+    public static RolesDto fromEntity(Roles roles) {
+        if (roles == null) {
+            return null;
+        }
+        return RolesDto.builder()
+                .id(roles.getId())
+                .nom(roles.getNom())
+                .build();
     }
 
-    public void setIdRoles(int idRoles) {
-        this.idRoles = idRoles;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public List<UserDto> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<UserDto> users) {
-        this.users = users;
+    public static Roles toEntity(RolesDto rolesDto) {
+        if (rolesDto == null) {
+            return null;
+        }
+        Roles roles = new Roles();
+        roles.setId(rolesDto.getId());
+        roles.setNom(rolesDto.getNom());
+        roles.setUser(UserDto.toEntity(rolesDto.getUser()));
+        return roles;
     }
 }

@@ -1,10 +1,18 @@
 package greta.federation.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import greta.federation.entity.Equipe;
+import greta.federation.entity.Saison;
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.Date;
 import java.util.List;
-
+@Data
+@Builder
 public class SaisonDto {
+    private Integer id;
     private Date annee;
     private int nbBut;
     private int nbEncaisse;
@@ -14,95 +22,45 @@ public class SaisonDto {
     private String meilleurGardien;
     private int nbCartonJaune;
     private int nbCartonRouge;
+    @JsonIgnore
     private List<EquipeDto> equipes;
     private CompetitionDto competition;
-    //Getters and Setters
-
-    public Date getAnnee() {
-        return annee;
+    public static SaisonDto fromEntity(Saison saison) {
+        if (saison == null) {
+            return null;
+        }
+        return SaisonDto.builder()
+                .id(saison.getId())
+                .annee(saison.getAnnee())
+                .nbBut(saison.getNbBut())
+                .nbEncaisse(saison.getNbEncaisse())
+                .meilleurJoueur(saison.getMeilleurJoueur())
+                .meilleurButeur(saison.getMeilleurButeur())
+                .meilleurPasseur(saison.getMeilleurPasseur())
+                .nbCartonJaune(saison.getNbCartonJaune())
+                .nbCartonRouge(saison.getNbCartonRouge())
+                .competition(CompetitionDto.fromEntity(saison.getCompetition()))
+                .build();
     }
 
-    public void setAnnee(Date annee) {
-        this.annee = annee;
+    public static Saison toEntity(SaisonDto saisonDto) {
+        if (saisonDto == null) {
+            return null;
+        }
+        Saison saison = new Saison();
+        saison.setId(saisonDto.getId());
+        saison.setAnnee(saisonDto.getAnnee());
+        saison.setNbBut(saisonDto.getNbBut());
+        saison.setNbEncaisse(saisonDto.getNbEncaisse());
+        saison.setMeilleurJoueur(saisonDto.getMeilleurJoueur());
+        saison.setMeilleurButeur(saisonDto.getMeilleurButeur());
+        saison.setMeilleurPasseur(saisonDto.getMeilleurPasseur());
+        saison.setMeilleurGardien(saisonDto.getMeilleurGardien());
+        saison.setNbCartonJaune(saisonDto.getNbCartonJaune());
+        saison.setNbCartonRouge(saisonDto.getNbCartonRouge());
+        saison.setCompetition(CompetitionDto.toEntity(saisonDto.getCompetition()));
+        return saison;
     }
 
-    public int getNbBut() {
-        return nbBut;
-    }
 
-    public void setNbBut(int nbBut) {
-        this.nbBut = nbBut;
-    }
-
-    public int getNbEncaisse() {
-        return nbEncaisse;
-    }
-
-    public void setNbEncaisse(int nbEncaisse) {
-        this.nbEncaisse = nbEncaisse;
-    }
-
-    public String getMeilleurJoueur() {
-        return meilleurJoueur;
-    }
-
-    public void setMeilleurJoueur(String meilleurJoueur) {
-        this.meilleurJoueur = meilleurJoueur;
-    }
-
-    public String getMeilleurButeur() {
-        return meilleurButeur;
-    }
-
-    public void setMeilleurButeur(String meilleurButeur) {
-        this.meilleurButeur = meilleurButeur;
-    }
-
-    public String getMeilleurPasseur() {
-        return meilleurPasseur;
-    }
-
-    public void setMeilleurPasseur(String meilleurPasseur) {
-        this.meilleurPasseur = meilleurPasseur;
-    }
-
-    public String getMeilleurGardien() {
-        return meilleurGardien;
-    }
-
-    public void setMeilleurGardien(String meilleurGardien) {
-        this.meilleurGardien = meilleurGardien;
-    }
-
-    public int getNbCartonJaune() {
-        return nbCartonJaune;
-    }
-
-    public void setNbCartonJaune(int nbCartonJaune) {
-        this.nbCartonJaune = nbCartonJaune;
-    }
-
-    public int getNbCartonRouge() {
-        return nbCartonRouge;
-    }
-
-    public void setNbCartonRouge(int nbCartonRouge) {
-        this.nbCartonRouge = nbCartonRouge;
-    }
-
-    public List<EquipeDto> getEquipes() {
-        return equipes;
-    }
-
-    public void setEquipes(List<EquipeDto> equipes) {
-        this.equipes = equipes;
-    }
-
-    public CompetitionDto getCompetition() {
-        return competition;
-    }
-
-    public void setCompetition(CompetitionDto competition) {
-        this.competition = competition;
-    }
 }

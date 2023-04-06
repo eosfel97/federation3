@@ -1,7 +1,11 @@
 package greta.federation.dto;
 
+import greta.federation.entity.Adresse;
+import lombok.Builder;
+import lombok.Data;
 
-
+@Data
+@Builder
 public class AdresseDto {
 
     private String nom_rue;
@@ -15,50 +19,35 @@ public class AdresseDto {
     private  String codePostale;
 
     private String pays;
-    //Getters and Setters
 
+    public static AdresseDto fromEntity(Adresse adresse) {
+        if (adresse == null) {
+            return null;
+        }
 
-    public String getNom_rue() {
-        return nom_rue;
+        return AdresseDto.builder()
+                .nom_rue(adresse.getNom_rue())
+                .num_rue(adresse.getNum_rue())
+                .libellee_rue(adresse.getLibellee_rue())
+                .codePostale(adresse.getCodePostale())
+                .ville(adresse.getVille())
+                .pays(adresse.getPays())
+                .build();
     }
 
-    public void setNom_rue(String nom_rue) {
-        this.nom_rue = nom_rue;
+    public static Adresse toEntity(AdresseDto adresseDto) {
+        if (adresseDto == null) {
+            return null;
+        }
+        Adresse adresse = new Adresse();
+                adresse.setNom_rue(adresse.getNom_rue());
+                adresse.setNum_rue(adresse.getNum_rue());
+                adresse.setLibellee_rue(adresse.getLibellee_rue());
+                adresse.setCodePostale(adresse.getCodePostale());
+                adresse.setVille(adresse.getVille());
+                adresse.setPays(adresse.getPays());
+        return adresse;
     }
 
-    public void setNum_rue(int num_rue) {
-        this.num_rue = num_rue;
-    }
 
-    public String getLibellee_rue() {
-        return libellee_rue;
-    }
-
-    public void setLibellee_rue(String libellee_rue) {
-        this.libellee_rue = libellee_rue;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public String getCodePostale() {
-        return codePostale;
-    }
-
-    public void setCodePostale(String codePostale) {
-        this.codePostale = codePostale;
-    }
-
-    public String getPays() {
-        return pays;
-    }
-
-    public void setPays(String pays) {
-        this.pays = pays;
-    }
 }
