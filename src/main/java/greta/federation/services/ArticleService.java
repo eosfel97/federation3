@@ -1,0 +1,25 @@
+package greta.federation.services;
+
+import greta.federation.dto.ArticleDto;
+import greta.federation.dto.LigneCommandeDto;
+
+
+import java.util.List;
+
+public interface ArticleService {
+
+    ArticleDto save(ArticleDto dto);
+
+    ArticleDto findById(Integer id);
+
+    ArticleDto findByNom(String nom);
+
+    List<ArticleDto> findAll();
+
+    List<LigneCommandeDto> findHistoriqueCommandeUser(Integer id_article);
+
+    List<ArticleDto> findAllArticleByIdCategorie(Integer id_categorie);
+
+    void delete(Integer id);
+
+}

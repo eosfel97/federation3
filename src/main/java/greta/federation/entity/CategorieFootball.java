@@ -1,15 +1,19 @@
 package greta.federation.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Table;
 import javax.persistence.*;
-@Entity
-@Table(name = "categorie_football")
-public class CategorieFootball {
+import java.util.List;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categorie_football")
-    private Integer idCategorieFootball;
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "categorie_football")
+public class CategorieFootball extends AbstractEntity {
 
     @Column(name = "nom")
     private String nom;
@@ -25,67 +29,11 @@ public class CategorieFootball {
 
     @Column(name = "nb_mi_temps_rencontre")
     private Short nbMiTempsRencontre;
+    @OneToMany(mappedBy = "categorieFootball")
+    private List<Equipe> equipes;
 
-    //constructeurs
+    @OneToMany(mappedBy = "categorieFootball")
+    private List<Competition> competitions;
 
-    public CategorieFootball() {
-    }
 
-    public CategorieFootball(Integer idCategorieFootball, String nom, Integer nbJoueursMaxEquipe, String nbRemplacantEquipe, Integer nbMinuteRencontre, Short nbMiTempsRencontre) {
-        this.idCategorieFootball = idCategorieFootball;
-        this.nom = nom;
-        this.nbJoueursMaxEquipe = nbJoueursMaxEquipe;
-        this.nbRemplacantEquipe = nbRemplacantEquipe;
-        this.nbMinuteRencontre = nbMinuteRencontre;
-        this.nbMiTempsRencontre = nbMiTempsRencontre;
-    }
-    //getters and setters
-
-    public Integer getIdCategorieFootball() {
-        return idCategorieFootball;
-    }
-
-    public void setIdCategorieFootball(Integer idCategorieFootball) {
-        this.idCategorieFootball = idCategorieFootball;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Integer getNbJoueursMaxEquipe() {
-        return nbJoueursMaxEquipe;
-    }
-
-    public void setNbJoueursMaxEquipe(Integer nbJoueursMaxEquipe) {
-        this.nbJoueursMaxEquipe = nbJoueursMaxEquipe;
-    }
-
-    public String getNbRemplacantEquipe() {
-        return nbRemplacantEquipe;
-    }
-
-    public void setNbRemplacantEquipe(String nbRemplacantEquipe) {
-        this.nbRemplacantEquipe = nbRemplacantEquipe;
-    }
-
-    public Integer getNbMinuteRencontre() {
-        return nbMinuteRencontre;
-    }
-
-    public void setNbMinuteRencontre(Integer nbMinuteRencontre) {
-        this.nbMinuteRencontre = nbMinuteRencontre;
-    }
-
-    public Short getNbMiTempsRencontre() {
-        return nbMiTempsRencontre;
-    }
-
-    public void setNbMiTempsRencontre(Short nbMiTempsRencontre) {
-        this.nbMiTempsRencontre = nbMiTempsRencontre;
-    }
 }

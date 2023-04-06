@@ -1,68 +1,32 @@
 package greta.federation.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "competition")
-public class Competition {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_competition")
-    private Integer idCompetition;
+public class Competition extends  AbstractEntity {
 
     @Column(name = "nom", unique = true)
     private String nom;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_type_competition")
     private TypeCompetition typeCompetition;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_categorie_football")
     private CategorieFootball categorieFootball;
-     //constructeurs
+    @OneToMany(mappedBy = "competition")
+    private List<Rencontre> rencontres;
+    @OneToMany(mappedBy = "competition")
+    private List<Saison> saisons;
 
-    public Competition() {
-    }
-
-    public Competition(Integer idCompetition, String nom, TypeCompetition typeCompetition, CategorieFootball categorieFootball) {
-        this.idCompetition = idCompetition;
-        this.nom = nom;
-        this.typeCompetition = typeCompetition;
-        this.categorieFootball = categorieFootball;
-    }
-    //getters and setters
-
-    public Integer getIdCompetition() {
-        return idCompetition;
-    }
-
-    public void setIdCompetition(Integer idCompetition) {
-        this.idCompetition = idCompetition;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public TypeCompetition getTypeCompetition() {
-        return typeCompetition;
-    }
-
-    public void setTypeCompetition(TypeCompetition typeCompetition) {
-        this.typeCompetition = typeCompetition;
-    }
-
-    public CategorieFootball getCategorieFootball() {
-        return categorieFootball;
-    }
-
-    public void setCategorieFootball(CategorieFootball categorieFootball) {
-        this.categorieFootball = categorieFootball;
-    }
 }

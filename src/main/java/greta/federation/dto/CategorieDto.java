@@ -1,27 +1,47 @@
 package greta.federation.dto;
 
-import greta.federation.entity.Article;
+
+import greta.federation.entity.Categorie;
+import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import java.util.List;
-
+@Data
+@Builder
 public class CategorieDto {
+    private Integer id;
     private String nom;
+    @JsonIgnore
     private List<ArticleDto> articles;
-    // GG and SS
 
-    public String getNom() {
-        return nom;
+
+
+    public static CategorieDto fromEntity(Categorie categorie) {
+        if (categorie == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        return CategorieDto.builder()
+                .id(categorie.getId())
+                .nom(categorie.getNom())
+                .build();
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public static Categorie toEntity(CategorieDto categorieDto) {
+        if (categorieDto == null) {
+            return null;
+            // TODO throw an exception
+        }
+
+        Categorie categorie = new Categorie();
+        categorie.setId(categorieDto.getId());
+        categorie.setNom(categorieDto.getNom());
+
+        return categorie;
     }
 
-    public List<ArticleDto> getArticles() {
-        return articles;
-    }
 
-    public void setArticles(List<ArticleDto> articles) {
-        this.articles = articles;
-    }
+
 }

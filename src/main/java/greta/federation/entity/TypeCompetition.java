@@ -1,41 +1,24 @@
 package greta.federation.entity;
 
-import javax.persistence.*;
-@Entity
-@Table(name = "type_competition")
-public class TypeCompetition {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_type_competition")
-    private Integer idTypeCompetition;
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "type_competition")
+public class TypeCompetition extends  AbstractEntity {
+
 
     @Column(name = "nom", unique = true)
     private String nom;
-    // constructeurs
 
-    public TypeCompetition() {
-    }
+    @OneToMany(mappedBy = "typeCompetition", cascade=CascadeType.ALL)
+    private List<Competition> competitions;
 
-    public TypeCompetition(Integer idTypeCompetition, String nom) {
-        this.idTypeCompetition = idTypeCompetition;
-        this.nom = nom;
-    }
-    //getters and setters
-
-    public Integer getIdTypeCompetition() {
-        return idTypeCompetition;
-    }
-
-    public void setIdTypeCompetition(Integer idTypeCompetition) {
-        this.idTypeCompetition = idTypeCompetition;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
 }
