@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 @Builder
 public class UserDto {
     private Integer id;
-
     private String nom;
     private String prenom;
     private String email;

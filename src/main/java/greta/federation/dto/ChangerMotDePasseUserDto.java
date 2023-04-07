@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class ChangerMotDePasseUtilisateurDto {
+public class ChangerMotDePasseUserDto {
     private Integer id;
 
     private String motDePasse;
