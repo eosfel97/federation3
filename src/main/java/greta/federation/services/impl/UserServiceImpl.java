@@ -1,6 +1,7 @@
 package greta.federation.services.impl;
 
-import greta.federation.dto.ChangerMotDePasseUtilisateurDto;
+import greta.federation.dto.ChangerMotDePasseUserDto;
+import org.springframework.context.ApplicationListener;
 import greta.federation.dto.UserDto;
 import greta.federation.entity.User;
 import greta.federation.exception.EntityNotFoundException;
@@ -12,6 +13,7 @@ import greta.federation.services.UserService;
 import greta.federation.validator.UserValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -26,14 +28,17 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository,
-                                  PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+
+
     }
+
     @Override
     public UserDto save(UserDto dto) {
         List<String> errors = UserValidator.validate(dto);
@@ -47,8 +52,8 @@ public class UserServiceImpl implements UserService {
                     Collections.singletonList("Un autre utilisateur avec le meme email existe deja dans la BDD"));
         }
 
-
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+
 
         return UserDto.fromEntity(
                 userRepository.save(
@@ -56,6 +61,8 @@ public class UserServiceImpl implements UserService {
                 )
         );
     }
+
+
     private boolean userAlreadyExists(String email) {
         Optional<User> user = userRepository.findUserByEmail(email);
         return user.isPresent();
@@ -102,7 +109,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto changerMotDePasse(ChangerMotDePasseUtilisateurDto dto) {
+    public UserDto changerMotDePasse(ChangerMotDePasseUserDto dto) {
         validate(dto);
         Optional<User> utilisateurOptional = userRepository.findById(dto.getId());
         if (utilisateurOptional.isEmpty()) {
@@ -117,7 +124,7 @@ public class UserServiceImpl implements UserService {
                 userRepository.save(user)
         );
     }
-    private void validate(ChangerMotDePasseUtilisateurDto dto) {
+    private void validate(ChangerMotDePasseUserDto dto) {
         if (dto == null) {
             log.warn("Impossible de modifier le mot de passe avec un objet NULL");
             throw new InvalidOperationException("Aucune information n'a ete fourni pour pouvoir changer le mot de passe",

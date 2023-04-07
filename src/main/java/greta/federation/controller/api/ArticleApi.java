@@ -14,6 +14,7 @@ import java.util.List;
 import static greta.federation.utils.Constants.APP_ROOT;
 
 @Api("/articles")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public interface ArticleApi {
     @PostMapping(value = APP_ROOT + "/articles/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un article", notes = "Cette methode permet d'enregistrer ou modifier un article", response = ArticleDto.class)

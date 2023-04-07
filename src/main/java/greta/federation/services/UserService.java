@@ -1,11 +1,13 @@
 package greta.federation.services;
 
-import greta.federation.dto.ChangerMotDePasseUtilisateurDto;
+import greta.federation.dto.ChangerMotDePasseUserDto;
 import greta.federation.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
+
+
     UserDto save(UserDto dto);
 
     UserDto findById(Integer id);
@@ -16,5 +18,5 @@ public interface UserService {
 
     UserDto findByEmail(String email);
 
-    UserDto changerMotDePasse(ChangerMotDePasseUtilisateurDto dto);
+    UserDto changerMotDePasse(ChangerMotDePasseUserDto dto);
 }
