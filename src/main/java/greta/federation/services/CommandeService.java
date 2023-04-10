@@ -26,7 +26,8 @@ public interface CommandeService {
 
     List<CommandeDto> findAll();
 
-    List<LigneCommandeDto> findAllLignesCommandesClientByCommandeClientId(Integer idCommande);
+    List<LigneCommandeDto> findAllLignesCommandesByCommandeId(Integer idCommande);
+
 
     void delete(Integer id);
 }

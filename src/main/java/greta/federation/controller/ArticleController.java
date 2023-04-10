@@ -4,11 +4,11 @@ import greta.federation.dto.ArticleDto;
 import greta.federation.dto.LigneCommandeDto;
 import greta.federation.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class ArticleController implements ArticleApi {
 
     private ArticleService articleService ;
@@ -24,7 +24,10 @@ public class ArticleController implements ArticleApi {
     public ArticleDto save(ArticleDto dto) {
         return articleService.save(dto);
     }
-
+    @Override
+    public ArticleDto update(Integer id, ArticleDto updatedArticle) {
+        return articleService.update(id, updatedArticle);
+    }
     @Override
     public ArticleDto findById(Integer id) {
         return articleService.findById(id);

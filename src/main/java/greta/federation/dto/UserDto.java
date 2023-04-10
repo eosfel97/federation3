@@ -63,6 +63,18 @@ public class UserDto {
         user.setAdresse(AdresseDto.toEntity(userDto.getAdresse()));
         user.setEquipe(EquipeDto.toEntity(userDto.getEquipe()));
 
+        if (userDto.getRoles() != null) {
+            user.setRoles(userDto.getRoles().stream()
+                    .map(RolesDto::toEntity)
+                    .collect(Collectors.toList()));
+        }
+
+        if (userDto.getCommandes() != null) {
+            user.setCommandes(userDto.getCommandes().stream()
+                    .map(CommandeDto::toEntity)
+                    .collect(Collectors.toList()));
+        }
+
         return user;
     }
 

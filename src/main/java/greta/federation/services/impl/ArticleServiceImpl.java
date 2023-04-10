@@ -1,7 +1,9 @@
 package greta.federation.services.impl;
 
 import greta.federation.dto.ArticleDto;
+import greta.federation.dto.CategorieDto;
 import greta.federation.dto.LigneCommandeDto;
+import greta.federation.entity.Article;
 import greta.federation.entity.LigneCommande;
 import greta.federation.exception.EntityNotFoundException;
 import greta.federation.exception.ErrorCodes;
@@ -44,6 +46,22 @@ public class ArticleServiceImpl implements ArticleService {
                 )
         );
     }
+    @Override
+    public ArticleDto update(Integer id, ArticleDto updatedArticle) {
+
+        Article existingArticle = articleRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Article not found with id " + id));
+
+        existingArticle.setNom(updatedArticle.getNom());
+        existingArticle.setDescription(updatedArticle.getDescription());
+        existingArticle.setPrix(updatedArticle.getPrix());
+        existingArticle.setQuantite(updatedArticle.getQuantite());
+        existingArticle.setCategorie(CategorieDto.toEntity(updatedArticle.getCategorie()));
+        ArticleDto existingArticleDto = ArticleDto.fromEntity(existingArticle);
+        return save(existingArticleDto);
+    }
+
+
 
     @Override
     public ArticleDto findById(Integer id) {
@@ -105,10 +123,10 @@ public class ArticleServiceImpl implements ArticleService {
             log.error("Article ID is null");
             return;
         }
-        List<LigneCommande> ligneCommande = commandeRepository.findAllByArticleId(id);
-        if (!ligneCommande.isEmpty()) {
+       // List<LigneCommande> ligneCommande = commandeRepository.findAllByArticleId(id);
+       /* if (!ligneCommande.isEmpty()) {
             throw new InvalidOperationException("Impossible de supprimer un article deja utilise dans des commandes client", ErrorCodes.ARTICLE_ALREADY_IN_USE);
-        }
+        }*/
         articleRepository.deleteById(id);
     }
 }

@@ -4,12 +4,15 @@ package greta.federation.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import greta.federation.entity.Commande;
+import greta.federation.entity.EtatCommande;
 import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+
+
 @Data
 @Builder
 public class CommandeDto {
@@ -20,6 +23,7 @@ public class CommandeDto {
     @JsonIgnore
     private List<LigneCommandeDto> ligneCommandes;
     private UserDto user;
+    private EtatCommande etatCommande;
     public static CommandeDto fromEntity(Commande commande){
 
         if(commande == null) {
@@ -47,5 +51,9 @@ public class CommandeDto {
 
         return commande;
     }
+    public boolean isCommandeLivree() {
+        return EtatCommande.LIVREE.equals(this.etatCommande);
+    }
+
 
 }
