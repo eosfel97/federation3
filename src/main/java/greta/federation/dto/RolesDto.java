@@ -1,5 +1,6 @@
 package greta.federation.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import greta.federation.entity.Roles;
 import lombok.Builder;
@@ -23,7 +24,12 @@ public class RolesDto {
                 .nom(roles.getNom())
                 .build();
     }
-
+    @JsonCreator
+    public static RolesDto fromString(String nom) {
+        return RolesDto.builder()
+                .nom(nom)
+                .build();
+    }
     public static Roles toEntity(RolesDto rolesDto) {
         if (rolesDto == null) {
             return null;
@@ -31,7 +37,7 @@ public class RolesDto {
         Roles roles = new Roles();
         roles.setId(rolesDto.getId());
         roles.setNom(rolesDto.getNom());
-        roles.setUser(UserDto.toEntity(rolesDto.getUser()));
+        // roles.setUser(UserDto.toEntity(rolesDto.getUser()));
         return roles;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static greta.federation.utils.Constants.USER_ENDPOINT;
+import static greta.federation.utils.Constants.ADMIN_ENDPOINT;
 
 @Api("users")
 public interface UserApi {
@@ -18,15 +19,15 @@ public interface UserApi {
     @PostMapping(USER_ENDPOINT + "/update/password")
     UserDto changerMotDePasse(@RequestBody ChangerMotDePasseUserDto dto);
 
-    @GetMapping(USER_ENDPOINT + "/{id_user}")
+    @GetMapping(ADMIN_ENDPOINT + "/{id_user}")
     UserDto findById(@PathVariable("id_user") Integer id);
 
-    @GetMapping(USER_ENDPOINT + "/find/{email}")
+    @GetMapping(ADMIN_ENDPOINT + "/find/{email}")
     UserDto findByEmail(@PathVariable("email") String email);
 
-    @GetMapping(USER_ENDPOINT + "/all")
+    @GetMapping(ADMIN_ENDPOINT + "/users/all")
     List<UserDto> findAll();
 
-    @DeleteMapping(USER_ENDPOINT + "/delete/{id_user}")
+    @DeleteMapping(ADMIN_ENDPOINT + "/delete/{id_user}")
     void delete(@PathVariable("id_user") Integer id);
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface ArticleService {
 
     ArticleDto save(ArticleDto dto);
-
+    ArticleDto update(Integer id, ArticleDto updatedArticle);
     ArticleDto findById(Integer id);
 
     ArticleDto findByNom(String nom);

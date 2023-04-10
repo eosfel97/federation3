@@ -4,10 +4,9 @@ import greta.federation.dto.auth.AuthenticationRequest;
 import greta.federation.dto.auth.AuthenticationResponse;
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import static greta.federation.utils.Constants.AUTHENTICATION_ENDPOINT;
 @Api("authentication")
