@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.GrantedAuthority;
 
 @RestController
 public class AuthenticationController implements AuthenticationApi {
@@ -33,9 +34,17 @@ public class AuthenticationController implements AuthenticationApi {
                 )
         );
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getLogin());
+        final ExtendedUser extendedUser = (ExtendedUser) userDetails;
 
-        final String jwt = jwtUtil.generateToken((ExtendedUser) userDetails);
+        final String jwt = jwtUtil.generateToken(extendedUser);
+        // Récupérer le rôle de l'utilisateur
+        String userRole = extendedUser.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse(null);
 
-        return ResponseEntity.ok(AuthenticationResponse.builder().accessToken(jwt).build());
+
+        return ResponseEntity.ok(AuthenticationResponse.builder().accessToken(jwt).userRole(userRole).build());
+
     }
 }

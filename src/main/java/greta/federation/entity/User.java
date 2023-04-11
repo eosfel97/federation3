@@ -36,7 +36,7 @@ public class User extends AbstractEntity {
     @Embedded
     private Adresse adresse;
 
-    @OneToMany (mappedBy ="user",cascade=CascadeType.ALL)
+    @OneToMany (fetch = FetchType.EAGER,mappedBy ="user",cascade=CascadeType.ALL)
     @JsonIgnore
     private List<Roles> roles;
 

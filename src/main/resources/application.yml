@@ -1,26 +1,22 @@
-server:
-  port: 7070
 spring:
   datasource:
-    password:
-    url: jdbc:mysql://localhost:3306/federation3?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/federation3?createDatabaseIfNotExist=true&userSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  ## Specify DBMS
   jpa:
-    generate-ddl: true
+    database: MYSQL
+    show-sql: false
+    properties:
+      hibernate:
+        session_factory:
+
+
+    # Hibernate DDL Auto (create, create-drop, update)
     hibernate:
       ddl-auto: update
-    show-sql: false
-    #   désactive la validation hibernate lors de la persistence
-    properties:
-      javax:
-        persistence:
-          validation:
-            mode: none
-    #  security:
-#    user:
-#      name: admin
-#      password: admin
-multipart:
-   maxFileSize:10MB
+      dialect: org.hibernate.dialect.MySQL5Dialect
 
-
+server:
+  port: 7071

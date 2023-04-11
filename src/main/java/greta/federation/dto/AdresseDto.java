@@ -40,12 +40,12 @@ public class AdresseDto {
             return null;
         }
         Adresse adresse = new Adresse();
-                adresse.setNom_rue(adresse.getNom_rue());
-                adresse.setNum_rue(adresse.getNum_rue());
-                adresse.setLibellee_rue(adresse.getLibellee_rue());
-                adresse.setCodePostale(adresse.getCodePostale());
-                adresse.setVille(adresse.getVille());
-                adresse.setPays(adresse.getPays());
+                adresse.setNom_rue(adresseDto.getNom_rue());
+                adresse.setNum_rue(adresseDto.getNum_rue());
+                adresse.setLibellee_rue(adresseDto.getLibellee_rue());
+                adresse.setCodePostale(adresseDto.getCodePostale());
+                adresse.setVille(adresseDto.getVille());
+                adresse.setPays(adresseDto.getPays());
         return adresse;
     }
 

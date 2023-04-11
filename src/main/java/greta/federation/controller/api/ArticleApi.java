@@ -11,18 +11,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static greta.federation.utils.Constants.ADMIN_ENDPOINT;
 import static greta.federation.utils.Constants.APP_ROOT;
 
 @Api("/articles")
 public interface ArticleApi {
-    @PostMapping(value = APP_ROOT + "/articles/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = ADMIN_ENDPOINT + "/articles/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un article", notes = "Cette methode permet d'enregistrer ou modifier un article", response = ArticleDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet article a été créer ou modifier"),
             @ApiResponse(code = 400, message = "L'objet article n'est pas valide")
     })
     ArticleDto save(@RequestBody ArticleDto dto);
-    @GetMapping(value = APP_ROOT + "/articles/{id_article}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = ADMIN_ENDPOINT + "/articles/update/{id_article}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Mettre à jour un article", notes = "Cette méthode permet de mettre à jour un article existant", response = ArticleDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'article a été mis à jour avec succès"),
+            @ApiResponse(code = 400, message = "L'objet article n'est pas valide"),
+            @ApiResponse(code = 404, message = "Aucun article n'existe dans la BDD avec l'ID fourni")
+    })
+    ArticleDto update(@PathVariable("id_article") Integer id, @RequestBody ArticleDto updatedArticle);
+    @GetMapping(value = ADMIN_ENDPOINT + "/articles/{id_article}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un article par ID", notes = "Cette methode permet de chercher un article par son ID", response = ArticleDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'article a ete trouve dans la BDD"),
@@ -51,7 +60,7 @@ public interface ArticleApi {
     @GetMapping(value = APP_ROOT + "/articles/historique/commandeuser/{id_article}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<LigneCommandeDto> findHistoriqueCommandeUser(@PathVariable("id_article") Integer id_article);
 
-    @DeleteMapping(value = APP_ROOT + "/articles/delete/{id_article}")
+    @DeleteMapping(value = ADMIN_ENDPOINT + "/articles/delete/{id_article}")
     @ApiOperation(value = "Supprimer un article", notes = "Cette methode permet de supprimer un article par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'article a ete supprime")
