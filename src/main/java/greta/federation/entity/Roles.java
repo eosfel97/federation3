@@ -19,9 +19,9 @@ public class Roles extends AbstractEntity {
     @Column(name="nom")
     private String nom;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
+
+    @OneToMany (mappedBy ="role",cascade=CascadeType.ALL)
+    private List<User> users;
 
 
 }

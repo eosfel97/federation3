@@ -19,7 +19,7 @@ public class LigneCommande extends AbstractEntity {
 
 
     @Column(name="quantite")
-    private int quantite;
+    private BigDecimal quantite;
 
     @Column(name="prix_unitaire")
     private BigDecimal prixUnitaire;

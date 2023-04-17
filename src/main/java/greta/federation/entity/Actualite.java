@@ -21,7 +21,7 @@ public class Actualite extends AbstractEntity {
     @Column(name = "information", columnDefinition = "TEXT")
     private String information;
 
-    @OneToMany(mappedBy="actualite", cascade=CascadeType.ALL)
-    private List<Image> images;
+    @Column(name = "photo")
+    private String photo;
 
 }

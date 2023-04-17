@@ -22,7 +22,7 @@ public interface CommandeService {
 
     CommandeDto findById(Integer id);
 
-    CommandeDto findByDateCommande(LocalDateTime dateCommande);
+    List<CommandeDto> findByDateCommande(LocalDateTime dateCommande);
 
     List<CommandeDto> findAll();
 

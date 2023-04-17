@@ -35,7 +35,7 @@ public class Article extends AbstractEntity {
     @OneToMany(mappedBy = "article")
     private List<LigneCommande> ligneCommande;
 
-    @OneToMany(mappedBy="article", cascade=CascadeType.ALL)
-    private List<Image> images;
+    @Column(name = "photo")
+    private String photo;
 
 }

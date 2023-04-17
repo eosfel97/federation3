@@ -4,5 +4,8 @@ import greta.federation.entity.Actualite;
 import greta.federation.entity.Joueur;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface JoueurRepository  extends JpaRepository<Joueur, Long> {
+import java.util.Optional;
+
+public interface JoueurRepository  extends JpaRepository<Joueur, Integer> {
+    Optional<Joueur> findByNom(String nom);
 }

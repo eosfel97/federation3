@@ -4,11 +4,9 @@ import greta.federation.dto.ArticleDto;
 import greta.federation.dto.CategorieDto;
 import greta.federation.dto.LigneCommandeDto;
 import greta.federation.entity.Article;
-import greta.federation.entity.LigneCommande;
 import greta.federation.exception.EntityNotFoundException;
 import greta.federation.exception.ErrorCodes;
 import greta.federation.exception.InvalidEntityException;
-import greta.federation.exception.InvalidOperationException;
 import greta.federation.repository.ArticleRepository;
 import greta.federation.repository.LigneCommandeRepository;
 import greta.federation.services.ArticleService;
@@ -31,7 +29,6 @@ public class ArticleServiceImpl implements ArticleService {
         this.articleRepository = articleRepository;
         this.commandeRepository = commandeRepository;
     }
-
     @Override
     public ArticleDto save(ArticleDto dto) {
         List<String> errors = ArticleValidator.validate(dto);

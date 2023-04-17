@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class LigneCommandeDto {
     private Integer id;
 
-    private int quantite;
+    private BigDecimal quantite;
 
 
     private BigDecimal prixUnitaire;
