@@ -1,6 +1,5 @@
 package greta.federation.dto;
 
-import greta.federation.entity.Image;
 import greta.federation.entity.Joueur;
 import lombok.Builder;
 import lombok.Data;
@@ -48,21 +47,21 @@ public class JoueurDto {
         }
         Joueur joueur = new Joueur();
 
-                joueur.setId(joueurDto.getId());
-                joueur.setNom(joueurDto.getNom());
-                joueur.setPrenom(joueurDto.getPrenom());
-                joueur.setPoids(joueurDto.getPoids());
-                joueur.setTaille(joueurDto.getTaille());
-                joueur.setNbBut(joueurDto.getNbBut());
-                joueur.setNbPasseDecisive(joueurDto.getNbPasseDecisive());
-                joueur.setNbCartonJaune(joueurDto.getNbCartonJaune());
-                joueur.setNbCartonRouge(joueurDto.getNbCartonRouge());
-                joueur.setNbButEncaisse(joueurDto.getNbButEncaisse());
-                joueur.setPoste(PosteDto.toEntity(joueurDto.getPoste()));
-                joueur.setEquipe(EquipeDto.toEntity(joueurDto.getEquipe()));
-                joueur.setEvenementRencontre(EvenementRencontreDto.toEntity(joueurDto.getEvenementRencontre()));
+        joueur.setId(joueurDto.getId());
+        joueur.setNom(joueurDto.getNom());
+        joueur.setPrenom(joueurDto.getPrenom());
+        joueur.setPoids(joueurDto.getPoids());
+        joueur.setTaille(joueurDto.getTaille());
+        joueur.setNbBut(joueurDto.getNbBut());
+        joueur.setNbPasseDecisive(joueurDto.getNbPasseDecisive());
+        joueur.setNbCartonJaune(joueurDto.getNbCartonJaune());
+        joueur.setNbCartonRouge(joueurDto.getNbCartonRouge());
+        joueur.setNbButEncaisse(joueurDto.getNbButEncaisse());
+        joueur.setPoste(PosteDto.toEntity(joueurDto.getPoste()));
+        joueur.setEquipe(EquipeDto.toEntity(joueurDto.getEquipe())); // Correction ici
+        joueur.setEvenementRencontre(EvenementRencontreDto.toEntity(joueurDto.getEvenementRencontre()));
 
-                         return joueur;
+        return joueur;
     }
 
 }

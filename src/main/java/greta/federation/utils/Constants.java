@@ -7,4 +7,6 @@ public interface Constants {
     String AUTHENTICATION_ENDPOINT = APP_ROOT + "/auth";
 
     String ADMIN_ENDPOINT = APP_ROOT + "/admin";
+
+    String DIRECTEUR_ENDPOINT = APP_ROOT + "/directeur";
 }

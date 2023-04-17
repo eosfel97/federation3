@@ -2,8 +2,6 @@ package greta.federation.services;
 
 import greta.federation.dto.ArticleDto;
 import greta.federation.dto.LigneCommandeDto;
-
-
 import java.util.List;
 
 public interface ArticleService {

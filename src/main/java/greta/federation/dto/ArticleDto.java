@@ -22,8 +22,8 @@ public class ArticleDto {
     private CategorieDto categorie;
     @JsonIgnore
     private List<LigneCommande> ligneCommande;
-    @JsonIgnore
-    private List<ImageDto> images;
+
+    private String photo;
 
 
     public static ArticleDto fromEntity(Article article){
@@ -38,6 +38,7 @@ public class ArticleDto {
                 .nom(article.getNom())
                 .description(article.getDescription())
                 .quantite(article.getQuantite())
+                .photo(article.getPhoto())
                 .categorie(CategorieDto.fromEntity(article.getCategorie()))
                 .build();
     }
@@ -51,6 +52,8 @@ public class ArticleDto {
         article.setNom(articleDto.getNom());
         article.setPrix(articleDto.getPrix());
         article.setQuantite(articleDto.getQuantite());
+        article.setDescription(articleDto.getDescription());
+        article.setPhoto(articleDto.getPhoto());
         article.setCategorie(CategorieDto.toEntity(articleDto.getCategorie()));
         return article;
     }

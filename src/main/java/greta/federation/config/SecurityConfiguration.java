@@ -59,9 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
-                        "/federation/users/**",
-                        "/federation/articles/**",
-                        "/federation/categories/**"
+                        "/federation/**"
                         )
                 .permitAll()
                 .antMatchers("/federation/admin/**").hasRole("ADMIN")
@@ -78,7 +76,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(Collections.singletonList("*"));
         config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH", "HEAD"));
         source.registerCorsConfiguration("/**", config);
         // some comment here
         return new CorsFilter(source);

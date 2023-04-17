@@ -17,10 +17,12 @@ public class UserDto {
     private String email;
     private String portable;
     private String identifiant;
+    @JsonIgnore
     private String password;
     private AdresseDto adresse;
 
-    private List<RolesDto> roles;
+    private RolesDto role;
+
     @JsonIgnore
     private List<CommandeDto> commandes;
     private EquipeDto equipe;
@@ -39,12 +41,7 @@ public class UserDto {
                 .password(user.getPassword())
                 .adresse(AdresseDto.fromEntity(user.getAdresse()))
                 .equipe(EquipeDto.fromEntity(user.getEquipe()))
-                .roles(
-                        user.getRoles() != null ?
-                                user.getRoles().stream()
-                                        .map(RolesDto::fromEntity)
-                                        .collect(Collectors.toList()) : null
-                )
+                .role(RolesDto.fromEntity(user.getRole()))
                 .build();
     }
 
@@ -62,12 +59,7 @@ public class UserDto {
         user.setPassword(userDto.getPassword());
         user.setAdresse(AdresseDto.toEntity(userDto.getAdresse()));
         user.setEquipe(EquipeDto.toEntity(userDto.getEquipe()));
-
-        if (userDto.getRoles() != null) {
-            user.setRoles(userDto.getRoles().stream()
-                    .map(RolesDto::toEntity)
-                    .collect(Collectors.toList()));
-        }
+        user.setRole(RolesDto.toEntity(userDto.getRole()));
 
         if (userDto.getCommandes() != null) {
             user.setCommandes(userDto.getCommandes().stream()
