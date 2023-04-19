@@ -1,22 +1,22 @@
 package greta.federation.dto;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import greta.federation.entity.EvenementRencontre;
-import greta.federation.entity.Joueur;
-import greta.federation.entity.Rencontre;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+
 @Data
 @Builder
 public class EvenementRencontreDto {
     private Integer id;
     private String nom;
     private String type;
-    private Joueur joueur;
+    private JoueurDto joueur;
     @JsonIgnore
-    private List<Joueur> joueurs;
+    private List<JoueurDto> joueurs;
     private RencontreDto rencontre;
 
     public static EvenementRencontreDto fromEntity(EvenementRencontre evenementRencontre) {
@@ -30,6 +30,7 @@ public class EvenementRencontreDto {
                 .rencontre(RencontreDto.fromEntity(evenementRencontre.getRencontre()))
                 .build();
     }
+
     public static EvenementRencontre toEntity(EvenementRencontreDto evenementRencontreDto) {
         if (evenementRencontreDto == null) {
             return null;
@@ -42,6 +43,5 @@ public class EvenementRencontreDto {
 
         return evenementRencontre;
     }
-
-
 }
+
