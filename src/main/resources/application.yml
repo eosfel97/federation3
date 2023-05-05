@@ -11,8 +11,6 @@ spring:
     properties:
       hibernate:
         session_factory:
-
-
     # Hibernate DDL Auto (create, create-drop, update)
     hibernate:
       ddl-auto: update
@@ -20,3 +18,9 @@ spring:
 
 server:
   port: 7071
+
+flickr:
+  apiKey: 5bcd3879894e4382f493bc1271681be0
+  apiSecret: b2fb6bbb9ee7ad2f
+  appKey: 72157720879200892-8b801b1d4b788005
+  appSecret: 7cc4446ac4f77e05
