@@ -30,6 +30,8 @@ public class RencontreDto {
                 .nbButDomicile(rencontre.getNbButDomicile())
                 .nbButExterieur(rencontre.getNbButExterieur())
                 .competition(CompetitionDto.fromEntity(rencontre.getCompetition()))
+                .equipeDomicile(EquipeDto.fromEntity(rencontre.getEquipeDomicile()))
+                .equipeExterieure(EquipeDto.fromEntity(rencontre.getEquipeExterieure()))
                 .build();
     }
 
@@ -42,6 +44,8 @@ public class RencontreDto {
         rencontre.setNbButDomicile(rencontreDto.getNbButDomicile());
         rencontre.setNbButExterieur(rencontreDto.getNbButExterieur());
         rencontre.setCompetition(CompetitionDto.toEntity(rencontreDto.getCompetition()));
+        rencontre.setEquipeDomicile(EquipeDto.toEntity(rencontreDto.getEquipeDomicile()));
+        rencontre.setEquipeExterieure(EquipeDto.toEntity(rencontreDto.getEquipeExterieure()));
 
         return rencontre;
     }
