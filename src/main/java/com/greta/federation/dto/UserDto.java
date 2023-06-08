@@ -56,9 +56,12 @@ public class UserDto {
 
     public void setRoleFromEntity(Roles role) {
         if (role != null) {
-            this.role = RolesDto.fromEntity(role);
+            RolesDto roleDto = new RolesDto();
+            roleDto.setId(role.getId());
+            this.role = roleDto;
         }
     }
+
 
 
     public static User toEntity(UserDto userDto) {

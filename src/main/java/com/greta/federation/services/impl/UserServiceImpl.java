@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         // Récupérer le rôle avec l'ID 3
-        Optional<Roles> optionalRole = rolesRepository.findById(3);
+        Optional<Roles> optionalRole = rolesRepository.findById(1);
 
         if (!optionalRole.isPresent()) {
             throw new RuntimeException("Le rôle par défaut avec l'ID 1 est introuvable.");
