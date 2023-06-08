@@ -27,5 +27,9 @@ public class Stade extends AbstractEntity {
     @OneToMany (mappedBy ="stade",cascade=CascadeType.ALL)
     private List<Club> clubs;
 
+    @OneToMany (mappedBy ="stade",cascade=CascadeType.ALL)
+    private List<Place> places;
+
+
 
 }
