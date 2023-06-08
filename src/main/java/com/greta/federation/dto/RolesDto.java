@@ -2,14 +2,18 @@ package com.greta.federation.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.greta.federation.entity.Roles;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RolesDto {
     private Integer id;
     private String nom;
