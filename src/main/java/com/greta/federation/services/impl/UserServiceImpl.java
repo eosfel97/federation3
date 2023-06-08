@@ -1,12 +1,15 @@
 package com.greta.federation.services.impl;
 
 import com.greta.federation.dto.ChangerMotDePasseUserDto;
+import com.greta.federation.dto.RolesDto;
 import com.greta.federation.dto.UserDto;
+import com.greta.federation.entity.Roles;
 import com.greta.federation.entity.User;
 import com.greta.federation.exception.EntityNotFoundException;
 import com.greta.federation.exception.ErrorCodes;
 import com.greta.federation.exception.InvalidEntityException;
 import com.greta.federation.exception.InvalidOperationException;
+import com.greta.federation.repository.RolesRepository;
 import com.greta.federation.services.UserService;
 import com.greta.federation.repository.UserRepository;
 import com.greta.federation.validator.UserValidator;
@@ -21,13 +24,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RolesRepository rolesRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder) {
@@ -39,26 +45,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto save(UserDto dto) {
-        List<String> errors = UserValidator.validate(dto);
-        if (!errors.isEmpty()) {
-            log.error("Utilisateur is not valid {}", dto);
-            throw new InvalidEntityException("L'utilisateur n'est pas valide", ErrorCodes.UTILISATEUR_NOT_VALID, errors);
+        List<String> erreurs = UserValidator.validate(dto);
+        if (!erreurs.isEmpty()) {
+            log.error("L'utilisateur n'est pas valide {}", dto);
+            throw new InvalidEntityException("L'utilisateur n'est pas valide", ErrorCodes.UTILISATEUR_NOT_VALID, erreurs);
         }
 
-        if(userAlreadyExists(dto.getEmail())) {
-            throw new InvalidEntityException("Un autre utilisateur avec le meme email existe deja", ErrorCodes.UTILISATEUR_ALREADY_EXISTS,
-                    Collections.singletonList("Un autre utilisateur avec le meme email existe deja dans la BDD"));
+        if (userAlreadyExists(dto.getEmail())) {
+            throw new InvalidEntityException("Un autre utilisateur avec le même email existe déjà", ErrorCodes.UTILISATEUR_ALREADY_EXISTS,
+                    Collections.singletonList("Un autre utilisateur avec le même email existe déjà dans la BDD"));
         }
 
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
+        // Récupérer le rôle avec l'ID 3
+        Optional<Roles> optionalRole = rolesRepository.findById(3);
 
-        return UserDto.fromEntity(
-                userRepository.save(
-                        UserDto.toEntity(dto)
-                )
-        );
+        if (!optionalRole.isPresent()) {
+            throw new RuntimeException("Le rôle par défaut avec l'ID 1 est introuvable.");
+        }
+
+        Roles defaultRole = optionalRole.get();
+
+        // Convertir le UserDto en entité User
+        User utilisateur = UserDto.toEntity(dto);
+
+        // Définir le rôle par défaut pour l'utilisateur
+        utilisateur.setRole(defaultRole);
+
+        // Enregistrer l'utilisateur et retourner le UserDto
+        User utilisateurEnregistre = userRepository.save(utilisateur);
+        return UserDto.fromEntity(utilisateurEnregistre);
     }
+
+
 
 
     private boolean userAlreadyExists(String email) {
@@ -122,6 +142,9 @@ public class UserServiceImpl implements UserService {
                 userRepository.save(user)
         );
     }
+
+
+
     private void validate(ChangerMotDePasseUserDto dto) {
         if (dto == null) {
             log.warn("Impossible de modifier le mot de passe avec un objet NULL");

@@ -1,9 +1,13 @@
 package com.greta.federation.dto;
 
+import antlr.ANTLRParser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.greta.federation.entity.Roles;
 import com.greta.federation.entity.User;
 import lombok.Builder;
 import lombok.Data;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +21,9 @@ public class UserDto {
     private String email;
     private String portable;
     private String identifiant;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
     private AdresseDto adresse;
 
     private RolesDto role;
@@ -27,11 +32,12 @@ public class UserDto {
     private List<CommandeDto> commandes;
     private EquipeDto equipe;
 
+
     public static UserDto fromEntity(User user) {
         if (user == null) {
             return null;
         }
-        return UserDto.builder()
+        UserDto userDto = UserDto.builder()
                 .id(user.getId())
                 .nom(user.getNom())
                 .prenom(user.getPrenom())
@@ -41,9 +47,19 @@ public class UserDto {
                 .password(user.getPassword())
                 .adresse(AdresseDto.fromEntity(user.getAdresse()))
                 .equipe(EquipeDto.fromEntity(user.getEquipe()))
-                .role(RolesDto.fromEntity(user.getRole()))
                 .build();
+
+        userDto.setRoleFromEntity(user.getRole());
+
+        return userDto;
     }
+
+    public void setRoleFromEntity(Roles role) {
+        if (role != null) {
+            this.role = RolesDto.fromEntity(role);
+        }
+    }
+
 
     public static User toEntity(UserDto userDto) {
         if (userDto == null) {
