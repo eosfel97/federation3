@@ -17,9 +17,6 @@ import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
-
-
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -33,23 +30,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private ApplicationRequestFilter applicationRequestFilter;
 
-
-
+    // Configurer le service d'authentification et le codeur de mot de passe
     @Override
-
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(applicationUserDetailsService)
-                .passwordEncoder(passwordEncoder())
-        ;
+                .passwordEncoder(passwordEncoder());
     }
 
+    // Configurer les filtres et les autorisations
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(corsFilter(), SessionManagementFilter.class)
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(
-                        "/**/authenticate",
+                        "/auth/authenticate",
                         "/v2/api-docs",
                         "/swagger-resources",
                         "/swagger-resources/**",
@@ -69,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(applicationRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-
+    // Configurer le filtre CORS
     @Bean
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -79,19 +74,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH", "HEAD"));
         source.registerCorsConfiguration("/**", config);
-        // some comment here
+
         return new CorsFilter(source);
     }
 
+    // Créer un gestionnaire d'authentification personnalisé
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManagerBean();
     }
 
+    // Utiliser BCryptPasswordEncoder pour le codage des mots de passe
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
-

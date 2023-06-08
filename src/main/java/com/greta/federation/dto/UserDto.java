@@ -21,6 +21,7 @@ public class UserDto {
     private String email;
     private String portable;
     private String identifiant;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -54,13 +55,16 @@ public class UserDto {
         return userDto;
     }
 
-    public void setRoleFromEntity(Roles role) {
+    private void setRoleFromEntity(Roles role) {
+    }
+
+   /* public void setRoleFromEntity(Roles role) {
         if (role != null) {
             RolesDto roleDto = new RolesDto();
             roleDto.setId(role.getId());
             this.role = roleDto;
         }
-    }
+    }*/
 
 
 

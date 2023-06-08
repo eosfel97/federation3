@@ -24,3 +24,8 @@ flickr:
   apiSecret: b2fb6bbb9ee7ad2f
   appKey: 72157720879200892-8b801b1d4b788005
   appSecret: 7cc4446ac4f77e05
+logging:
+  level:
+    com.greta.federation: TRACE
+  file:
+    name: logs/app.log
