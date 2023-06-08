@@ -25,6 +25,7 @@ public class StadeDto {
                 .nom(stade.getNom())
                 .nbPlaces(stade.getNbPlaces())
                 .typeTerrain(stade.getTypeTerrain())
+
                 .build();
     }
     public static Stade toEntity(StadeDto stadeDto) {
@@ -37,7 +38,6 @@ public class StadeDto {
         stade.setNom(stadeDto.getNom());
         stade.setNbPlaces(stadeDto.getNbPlaces());
         stade.setTypeTerrain(stadeDto.getTypeTerrain());
-
         return stade;
     }
 }

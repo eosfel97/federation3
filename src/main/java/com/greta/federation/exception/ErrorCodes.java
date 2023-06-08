@@ -59,8 +59,11 @@ public enum ErrorCodes {
 
     // Liste des exception techniques
     UPDATE_PHOTO_EXCEPTION(14000),
-    UNKNOWN_CONTEXT(14001)
-    ;
+    UNKNOWN_CONTEXT(14001),
+
+    PLACE_NOT_VALID (14500),
+    PLACE_NOT_FOUND(145001);
+
 
     private int code;
 
