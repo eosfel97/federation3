@@ -17,7 +17,6 @@ public class UserDto {
     private String email;
     private String portable;
     private String identifiant;
-    @JsonIgnore
     private String password;
     private AdresseDto adresse;
 
