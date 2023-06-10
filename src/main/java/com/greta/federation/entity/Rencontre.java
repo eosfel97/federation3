@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,9 @@ public class Rencontre extends AbstractEntity {
 
     @Column(name = "nb_but_exterieur")
     private int nbButExterieur;
+
+    @Column(name = "date_rencontre")
+    private LocalDateTime dateRencontre;
 
     @OneToMany(mappedBy = "rencontre")
     private List<Arbitre>arbitres;

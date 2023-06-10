@@ -24,11 +24,11 @@ public class Stade extends AbstractEntity {
     @Column(name = "type_terrain")
     private String typeTerrain;
 
+
     @OneToMany (mappedBy ="stade",cascade=CascadeType.ALL)
     private List<Club> clubs;
 
-    @OneToMany (mappedBy ="stade",cascade=CascadeType.ALL)
-    private List<Place> places;
+
 
 
 

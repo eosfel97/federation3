@@ -5,6 +5,7 @@ import com.greta.federation.entity.Rencontre;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 @Data
 @Builder
@@ -13,6 +14,7 @@ public class RencontreDto {
 
     private int nbButDomicile;
     private int nbButExterieur;
+    private LocalDateTime dateRencontre;
     @JsonIgnore
     private List<ArbitreDto> arbitres;
     private EquipeDto equipeExterieure;
@@ -29,6 +31,7 @@ public class RencontreDto {
                 .id(rencontre.getId())
                 .nbButDomicile(rencontre.getNbButDomicile())
                 .nbButExterieur(rencontre.getNbButExterieur())
+                .dateRencontre(rencontre.getDateRencontre())
                 .competition(CompetitionDto.fromEntity(rencontre.getCompetition()))
                 .equipeDomicile(EquipeDto.fromEntity(rencontre.getEquipeDomicile()))
                 .equipeExterieure(EquipeDto.fromEntity(rencontre.getEquipeExterieure()))
@@ -41,6 +44,7 @@ public class RencontreDto {
         }
         Rencontre rencontre = new Rencontre();
         rencontre.setId(rencontreDto.getId());
+        rencontre.setDateRencontre(rencontreDto.getDateRencontre());
         rencontre.setNbButDomicile(rencontreDto.getNbButDomicile());
         rencontre.setNbButExterieur(rencontreDto.getNbButExterieur());
         rencontre.setCompetition(CompetitionDto.toEntity(rencontreDto.getCompetition()));

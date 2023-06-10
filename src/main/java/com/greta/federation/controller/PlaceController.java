@@ -23,29 +23,21 @@ public class PlaceController implements PlaceApi {
         return placeService.save(dto);
     }
 
-    @Override
-    public List<PlaceDto> findByAile(String aile) {
-        return placeService.findByAile(aile);
-    }
+
 
     @Override
-    public List<PlaceDto> findByLigne(String ligne) {
-        return placeService.findByLigne(ligne);
+    public List<PlaceDto> findByLigne(String nom) {
+        return placeService.findByLigne(nom);
     }
 
-    @Override
-    public List<PlaceDto> findByNumLigne(String numLigne) {
-        return placeService.findByNumLigne(numLigne);
-    }
-
-    @Override
-    public List<PlaceDto> findByStadeId(Integer idStade) {
-        return placeService.findByStadeId(idStade);
-    }
 
     @Override
     public List<PlaceDto> findAll() {
         return placeService.findAll();
+    }
+    @Override
+    public PlaceDto findById(Integer id) {
+        return placeService.findById(id);
     }
 
     @Override

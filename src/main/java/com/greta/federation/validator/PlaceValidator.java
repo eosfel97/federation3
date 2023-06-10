@@ -7,29 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceValidator {
+    public static List<String> validate(PlaceDto placeDto) {
+        List<String> erreurs = new ArrayList<>();
 
-    public static List<String> validate(PlaceDto dto) {
-        List<String> errors = new ArrayList<>();
-        if (dto == null) {
-            errors.add("Veuillez renseigner l'aile de la place");
-            errors.add("Veuillez renseigner la ligne de la place");
-            errors.add("Veuillez renseigner le numéro de ligne de la place");
-            errors.add("Veuillez renseigner l'ID du stade associé");
-            return errors;
-        }
-        if (!StringUtils.hasLength(dto.getAile())) {
-            errors.add("Veuillez renseigner l'aile de la place");
-        }
-        if (!StringUtils.hasLength(dto.getLigne())) {
-            errors.add("Veuillez renseigner la ligne de la place");
-        }
-        if (!StringUtils.hasLength(dto.getNumLigne())) {
-            errors.add("Veuillez renseigner le numéro de ligne de la place");
-        }
-        if (dto.getStade() == null || dto.getStade().getId() == null) {
-            errors.add("Veuillez renseigner l'ID du stade associé à la place");
+        if (placeDto.getId() == null){
+            erreurs.add("L'id de la place est nécessaire.");
         }
 
-        return errors;
+        if (placeDto.getNumero() < 0){
+            erreurs.add("Le numéro de la place ne peut pas être négatif.");
+        }
+
+        if (placeDto.getLigne() == null){
+            erreurs.add("La ligne associée à la place est nécessaire.");
+        }
+
+        return erreurs;
     }
 }

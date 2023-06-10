@@ -6,17 +6,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "place")
-public class Place extends AbstractEntity {
+@Entity
+@Table(name = "Ligne")
+public class Ligne extends AbstractEntity {
 
-    @Column(name = "numero")
-    private int numero;
+    @Column(name = "nom")
+    private String nom;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Ligne")
-    private Ligne ligne;
+    @JoinColumn(name = "Id_Aile")
+    private Aile aile;
 }

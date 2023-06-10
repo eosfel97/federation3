@@ -16,25 +16,19 @@ public interface PlaceApi {
     PlaceDto save(@RequestBody PlaceDto dto);
 
 
-    @GetMapping(value = Constants.APP_ROOT + "/places/filtrer/{aile}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher une place par aile", notes = "Cette méthode permet de rechercher une place par son aile", response = PlaceDto.class)
-    List<PlaceDto> findByAile(@PathVariable("aile") String aile);
+    @GetMapping(value = Constants.APP_ROOT + "/places/filtrer/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher une place par le nom de la ligne", notes = "Cette méthode permet de rechercher une place par le nom de la ligne", response = PlaceDto.class)
+    List<PlaceDto> findByLigne (@PathVariable("nom") String nom);
 
-    @GetMapping(value = Constants.APP_ROOT + "/places/filtrer/{ligne}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher une place par ligne", notes = "Cette méthode permet de rechercher une place par sa ligne", response = PlaceDto.class)
-    List<PlaceDto> findByLigne(@PathVariable("ligne") String ligne);
 
-    @GetMapping(value = Constants.APP_ROOT + "/places/filtrer/{num_ligne}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher une place par numéro de ligne", notes = "Cette méthode permet de rechercher une place par son numéro de ligne", response = PlaceDto.class)
-    List<PlaceDto> findByNumLigne(@PathVariable("num_ligne") String numLigne);
-
-    @GetMapping(value = Constants.APP_ROOT + "/places/filtrer/{id_stade}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher des places par ID de stade", notes = "Cette méthode permet de rechercher des places en utilisant l'ID du stade associé", responseContainer = "List<PlaceDto>")
-    List<PlaceDto> findByStadeId(@PathVariable("id_stade") Integer idStade);
 
     @GetMapping(value = Constants.APP_ROOT + "/places/tous", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoyer la liste des places", notes = "Cette méthode permet de rechercher et renvoyer la liste des places qui existent dans la base de données", responseContainer = "List<PlaceDto>")
     List<PlaceDto> findAll();
+
+    @GetMapping(value = Constants.APP_ROOT + "/places/{id_place}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher une place par ID", notes = "Cette méthode permet de rechercher une place par son ID", response = PlaceDto.class)
+    PlaceDto findById(@PathVariable("id_place") Integer id);
 
     @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/places/supprimer/{id_place}")
     @ApiOperation(value = "Supprimer une place", notes = "Cette méthode permet de supprimer une place par son ID")
