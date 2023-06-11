@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Billet extends AbstractEntity {
 
     @Column(name = "numero", nullable = false)
-    private int numero;
+    private String numero;
 
     @Column(name = "date_achat", nullable = false)
     private LocalDateTime dateAchat;
