@@ -1,7 +1,7 @@
 package com.greta.federation.dto;
 
+import com.greta.federation.entity.Ligne;
 import com.greta.federation.entity.Place;
-import com.greta.federation.entity.Stade;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,10 +9,9 @@ import lombok.Data;
 @Builder
 public class PlaceDto {
     private Integer id;
-    private String aile;
-    private String ligne;
-    private String numLigne;
-    private StadeDto stade;
+    private int numero;
+
+    private Ligne ligne;
 
     public static PlaceDto fromEntity(Place place) {
         if (place == null) {
@@ -20,10 +19,8 @@ public class PlaceDto {
         }
         return PlaceDto.builder()
                 .id(place.getId())
-                .aile(place.getAile())
                 .ligne(place.getLigne())
-                .numLigne(place.getNumLigne())
-                .stade(StadeDto.fromEntity(place.getStade()))
+                .numero(place.getNumero())
                 .build();
     }
 
@@ -33,10 +30,9 @@ public class PlaceDto {
         }
         Place place = new Place();
         place.setId(placeDto.getId());
-        place.setAile(placeDto.getAile());
         place.setLigne(placeDto.getLigne());
-        place.setNumLigne(placeDto.getNumLigne());
-        place.setStade(StadeDto.toEntity(placeDto.getStade()));
+        place.setNumero(placeDto.getNumero());
+
         return place;
     }
 }

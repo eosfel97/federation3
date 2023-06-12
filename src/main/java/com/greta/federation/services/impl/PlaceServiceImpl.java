@@ -58,55 +58,20 @@ public class PlaceServiceImpl implements PlaceService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<PlaceDto> findByAile(String aile) {
-        if (!StringUtils.hasLength(aile)) {
-            log.error("Le nom de l'aile est null");
-            return null;
-        }
-
-        return placeRepository.findByAile(aile)
-                .stream()
-                .map(PlaceDto::fromEntity)
-                .collect(Collectors.toList());
-    }
 
     @Override
-    public List<PlaceDto> findByLigne(String ligne) {
-        if (!StringUtils.hasLength(ligne)) {
-            log.error("Le nom de la ligne est null");
-            return null;
-        }
-
-        return placeRepository.findByLigne(ligne)
-                .stream()
-                .map(PlaceDto::fromEntity)
-                .collect(Collectors.toList());
+    public List<PlaceDto> findByLigne(String nom) {
+        List<Place> places = placeRepository.findByLigne(nom);
+        return places.stream().map(PlaceDto::fromEntity).collect(Collectors.toList());
     }
 
-    @Override
-    public List<PlaceDto> findByNumLigne(String numLigne) {
-        if (!StringUtils.hasLength(numLigne)) {
-            log.error("Le numéro de ligne est null");
-            return null;
-        }
 
-        return placeRepository.findByNumLigne(numLigne)
-                .stream()
-                .map(PlaceDto::fromEntity)
-                .collect(Collectors.toList());
-    }
 
-    @Override
-    public List<PlaceDto> findByStadeId(Integer idStade) {
-        return placeRepository.findByStadeId(idStade)
-                .stream()
-                .map(PlaceDto::fromEntity)
-                .collect(Collectors.toList());
-    }
 
     @Override
     public void delete(Integer id) {
         placeRepository.deleteById(id);
     }
+
+
 }
