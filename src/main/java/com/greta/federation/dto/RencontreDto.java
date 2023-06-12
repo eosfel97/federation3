@@ -2,6 +2,7 @@ package com.greta.federation.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greta.federation.entity.Rencontre;
+import com.greta.federation.entity.Stade;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class RencontreDto {
     @JsonIgnore
     private List<ArbitreDto> arbitres;
     private EquipeDto equipeExterieure;
+    private Stade stade;
     private EquipeDto equipeDomicile;
     private CompetitionDto competition;
     @JsonIgnore
@@ -32,6 +34,7 @@ public class RencontreDto {
                 .nbButDomicile(rencontre.getNbButDomicile())
                 .nbButExterieur(rencontre.getNbButExterieur())
                 .dateRencontre(rencontre.getDateRencontre())
+                .stade(rencontre.getStade())
                 .competition(CompetitionDto.fromEntity(rencontre.getCompetition()))
                 .equipeDomicile(EquipeDto.fromEntity(rencontre.getEquipeDomicile()))
                 .equipeExterieure(EquipeDto.fromEntity(rencontre.getEquipeExterieure()))
@@ -47,6 +50,7 @@ public class RencontreDto {
         rencontre.setDateRencontre(rencontreDto.getDateRencontre());
         rencontre.setNbButDomicile(rencontreDto.getNbButDomicile());
         rencontre.setNbButExterieur(rencontreDto.getNbButExterieur());
+        rencontre.setStade(rencontreDto.getStade());
         rencontre.setCompetition(CompetitionDto.toEntity(rencontreDto.getCompetition()));
         rencontre.setEquipeDomicile(EquipeDto.toEntity(rencontreDto.getEquipeDomicile()));
         rencontre.setEquipeExterieure(EquipeDto.toEntity(rencontreDto.getEquipeExterieure()));
