@@ -37,6 +37,10 @@ public class AileController implements AileApi {
     public List<AileDto> findAll() {
         return aileService.findAll();
     }
+    @Override
+    public List<String> findLigneNomByAileId(Integer aileId) {
+        return aileService.findLigneNomByAileId(aileId);
+    }
 
     @Override
     public void delete(Integer id) {

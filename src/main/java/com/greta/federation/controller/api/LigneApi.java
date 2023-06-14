@@ -23,6 +23,10 @@ public interface LigneApi {
     @ApiOperation(value = "Renvoyer la liste des lignes", notes = "Cette méthode permet de rechercher et renvoyer la liste de toutes les lignes", responseContainer = "List<LigneDto>")
     List<LigneDto> findAll();
 
+    @GetMapping(value = Constants.APP_ROOT + "/lignes/{id_ligne}/places/noms", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi les noms des places par ligne ID", notes = "Cette méthode permet de chercher et renvoyer les noms des places d'une ligne donné par ID", responseContainer = "List<String>")
+    List<String> findPlaceNomByLigneId(@PathVariable("id_ligne") Integer ligneId);
+
     @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/lignes/supprimer/{id_ligne}")
     @ApiOperation(value = "Supprimer une ligne", notes = "Cette méthode permet de supprimer une ligne par son ID")
     void delete(@PathVariable("id_ligne") Integer id);

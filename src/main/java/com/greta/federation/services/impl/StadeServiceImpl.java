@@ -1,6 +1,7 @@
 package com.greta.federation.services.impl;
 
 
+import com.greta.federation.entity.Aile;
 import com.greta.federation.entity.Stade;
 import com.greta.federation.exception.EntityNotFoundException;
 import com.greta.federation.exception.ErrorCodes;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -86,6 +88,22 @@ public class StadeServiceImpl implements StadeService {
                 .stream()
                 .map(StadeDto::fromEntity)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> findAileNomByStadeId(Integer id) {
+        Optional<Stade> stadeOptional = stadeRepository.findById(id);
+
+        if(stadeOptional.isPresent()){
+            Stade stade = stadeOptional.get();
+            List<Aile> ailes = stade.getAiles();
+            if (ailes != null && !ailes.isEmpty()) {
+                return ailes.stream()
+                        .map(Aile::getNom)
+                        .collect(Collectors.toList());
+            }
+        }
+        return null;
     }
 
     @Override

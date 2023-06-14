@@ -2,6 +2,7 @@ package com.greta.federation.services.impl;
 
 import com.greta.federation.dto.LigneDto;
 import com.greta.federation.entity.Ligne;
+import com.greta.federation.entity.Place;
 import com.greta.federation.exception.EntityNotFoundException;
 import com.greta.federation.exception.ErrorCodes;
 import com.greta.federation.exception.InvalidEntityException;
@@ -11,9 +12,9 @@ import com.greta.federation.validator.LigneValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,6 +58,32 @@ public class LigneServiceImpl implements LigneService {
                 .map(LigneDto::fromEntity)
                 .collect(Collectors.toList());
     }
+
+
+    @Override
+    public List<String> findPlaceNomByLigneId(Integer id) {
+        Optional<Ligne> stadeOptional = ligneRepository.findById(id);
+
+        if(stadeOptional.isPresent()){
+            Ligne ligne = stadeOptional.get();
+            List<Place> places = ligne.getPlaces();
+            if (places != null && !places.isEmpty()) {
+                return places.stream()
+                        .map(Place::getNom)
+                        .collect(Collectors.toList());
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public LigneDto findByNom(String nom) {
+        Ligne ligne = ligneRepository.findByNom(nom)
+                .orElseThrow(() -> new EntityNotFoundException( "Aucune aile avec le Nom = " + nom + " n' ete trouve dans la BDD",
+                        ErrorCodes.AILE_NOT_FOUND));
+        return LigneDto.fromEntity(ligne);
+    }
+
 
     @Override
     public void delete(Integer id) {

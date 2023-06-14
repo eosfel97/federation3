@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Builder
 public class PlaceDto {
     private Integer id;
-    private int numero;
+    private String nom;
     private BigDecimal prix;
 
     private Ligne ligne;
@@ -23,7 +23,7 @@ public class PlaceDto {
         return PlaceDto.builder()
                 .id(place.getId())
                 .ligne(place.getLigne())
-                .numero(place.getNumero())
+                .nom(place.getNom())
                 .prix(place.getPrix())
                 .build();
     }
@@ -36,7 +36,7 @@ public class PlaceDto {
         place.setId(placeDto.getId());
         place.setLigne(placeDto.getLigne());
         place.setPrix(placeDto.getPrix());
-        place.setNumero(placeDto.getNumero());
+        place.setNom(placeDto.getNom());
 
         return place;
     }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,4 +20,8 @@ public class Ligne extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "Id_Aile")
     private Aile aile;
+
+    @OneToMany (mappedBy ="ligne",cascade=CascadeType.ALL)
+    private List<Place> places;
+
 }

@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 @Table(name = "place")
 public class Place extends AbstractEntity {
 
-    @Column(name = "numero")
-    private int numero;
+    @Column(name = "nom")
+    private String nom;
 
     @Column(name="prix")
     private BigDecimal prix;

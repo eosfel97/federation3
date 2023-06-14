@@ -46,6 +46,11 @@ public interface AileApi {
     })
     List<AileDto> findAll();
 
+
+    @GetMapping(value = Constants.APP_ROOT + "/ailes/{id_aile}/lignes/noms", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi les noms des lignes par aile ID", notes = "Cette méthode permet de chercher et renvoyer les noms des lignes d'une aile donné par ID", responseContainer = "List<String>")
+    List<String> findLigneNomByAileId(@PathVariable("id_aile") Integer aileId);
+
     @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/ailes/supprimer/{id_aile}")
     @ApiOperation(value = "Supprimer une aile", notes = "Cette méthode permet de supprimer une aile par son ID")
     @ApiResponses(value = {

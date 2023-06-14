@@ -14,8 +14,8 @@ public class PlaceValidator {
             erreurs.add("L'id de la place est nécessaire.");
         }
 
-        if (placeDto.getNumero() < 0){
-            erreurs.add("Le numéro de la place ne peut pas être négatif.");
+        if (placeDto.getNom() == null){
+            erreurs.add("Le nom de la place est nécessaire.");
         }
 
         if (placeDto.getLigne() == null){
