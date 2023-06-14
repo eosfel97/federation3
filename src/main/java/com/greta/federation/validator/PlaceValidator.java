@@ -21,7 +21,9 @@ public class PlaceValidator {
         if (placeDto.getLigne() == null){
             erreurs.add("La ligne associée à la place est nécessaire.");
         }
-
+        if (placeDto.getPrix() == null ){
+            erreurs.add("vous devez entrer un prix pour la place");
+        }
         return erreurs;
     }
 }

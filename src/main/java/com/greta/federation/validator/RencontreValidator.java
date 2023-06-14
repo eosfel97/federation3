@@ -27,6 +27,9 @@ public class RencontreValidator {
         if (dto.getCompetition() == null) {
             errors.add("Veuillez renseigner la compétition");
         }
+        if (dto.getStade() == null) {
+            errors.add("Veuillez renseigner le stade");
+        }
 
         return errors;
     }

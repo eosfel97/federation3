@@ -5,11 +5,14 @@ import com.greta.federation.entity.Place;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 public class PlaceDto {
     private Integer id;
     private int numero;
+    private BigDecimal prix;
 
     private Ligne ligne;
 
@@ -21,6 +24,7 @@ public class PlaceDto {
                 .id(place.getId())
                 .ligne(place.getLigne())
                 .numero(place.getNumero())
+                .prix(place.getPrix())
                 .build();
     }
 
@@ -31,6 +35,7 @@ public class PlaceDto {
         Place place = new Place();
         place.setId(placeDto.getId());
         place.setLigne(placeDto.getLigne());
+        place.setPrix(placeDto.getPrix());
         place.setNumero(placeDto.getNumero());
 
         return place;

@@ -55,17 +55,18 @@ public class UserDto {
         return userDto;
     }
 
-    private void setRoleFromEntity(Roles role) {
-    }
 
-   /* public void setRoleFromEntity(Roles role) {
+
+    public void setRoleFromEntity(Roles role) {
         if (role != null) {
             RolesDto roleDto = new RolesDto();
             roleDto.setId(role.getId());
+            roleDto.setNom(role.getNom());
             this.role = roleDto;
+        } else {
+            this.role = null;
         }
-    }*/
-    //test
+    }
 
 
 

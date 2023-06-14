@@ -26,6 +26,11 @@ public class Rencontre extends AbstractEntity {
 
     @OneToMany(mappedBy = "rencontre")
     private List<Arbitre>arbitres;
+
+    @ManyToOne
+    @JoinColumn(name = "id_stade", nullable = false)
+    private Stade stade;
+
     @ManyToOne
     @JoinColumn(name = "id_exterieur")
     private Equipe equipeExterieure;
