@@ -1,7 +1,6 @@
 package com.greta.federation.services.impl;
 
 import com.greta.federation.dto.ChangerMotDePasseUserDto;
-import com.greta.federation.dto.RolesDto;
 import com.greta.federation.dto.UserDto;
 import com.greta.federation.entity.Roles;
 import com.greta.federation.entity.User;
@@ -24,7 +23,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 @Slf4j
@@ -58,14 +56,19 @@ public class UserServiceImpl implements UserService {
 
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-        // Récupérer le rôle avec l'ID 3
+        // Récupérer le rôle avec l'ID 1
         Optional<Roles> optionalRole = rolesRepository.findById(1);
 
-        if (!optionalRole.isPresent()) {
-            throw new RuntimeException("Le rôle par défaut avec l'ID 1 est introuvable.");
+        Roles defaultRole;
+        if (optionalRole.isPresent()) {
+            defaultRole = optionalRole.get();
+        } else {
+            // Créer un rôle par défaut avec l'ID 1
+            defaultRole = new Roles();
+            defaultRole.setId(1);
+            defaultRole.setNom("ROLE_SUPPORTERS");
+            defaultRole = rolesRepository.save(defaultRole);
         }
-
-        Roles defaultRole = optionalRole.get();
 
         // Convertir le UserDto en entité User
         User utilisateur = UserDto.toEntity(dto);

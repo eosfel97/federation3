@@ -29,3 +29,5 @@ logging:
     com.greta.federation: TRACE
   file:
     name: logs/app.log
+stripe:
+  secretKey: sk_test_51KX6uPAXs1xr62PHMRfRVmUMHdb6KD7OnCVB2ddaVxIeDZVRRBL4lIZjfCAgwb5j00TOUDfZbScoFuym4WFmnVhe00ZDBwXT1U
