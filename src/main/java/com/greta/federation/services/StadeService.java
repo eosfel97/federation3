@@ -8,9 +8,8 @@ public interface StadeService {
     StadeDto save(StadeDto dto);
     StadeDto findById(Integer id);
     List<StadeDto> findAll();
-
+    List<String> findAileNomByStadeId(Integer stadeId);
     StadeDto findByNom(String nom);
-
     StadeDto update(Integer id, StadeDto updatedStade);
     void delete(Integer id);
 }

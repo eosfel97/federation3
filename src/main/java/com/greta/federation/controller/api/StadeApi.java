@@ -30,6 +30,10 @@ public interface StadeApi {
     @ApiOperation(value = "Renvoi la liste des stades", notes = "Cette méthode permet de chercher et renvoyer la liste des stades qui existent dans la base de données", responseContainer = "List<StadeDto>")
     List<StadeDto> findAll();
 
+    @GetMapping(value = Constants.APP_ROOT + "/stades/{id_stade}/ailes/noms", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi les noms des ailes par stade ID", notes = "Cette méthode permet de chercher et renvoyer les noms des ailes d'un stade donné par ID", responseContainer = "List<String>")
+    List<String> findAileNomByStadeId(@PathVariable("id_stade") Integer stadeId);
+
     @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/stades/delete/{id_stade}")
     @ApiOperation(value = "Supprimer un stade", notes = "Cette méthode permet de supprimer un stade par ID")
     void delete(@PathVariable("id_stade") Integer id);

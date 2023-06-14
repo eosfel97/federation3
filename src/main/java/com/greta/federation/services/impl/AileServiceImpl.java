@@ -4,6 +4,8 @@ import com.greta.federation.dto.AileDto;
 import com.greta.federation.dto.ClubDto;
 import com.greta.federation.entity.Aile;
 import com.greta.federation.entity.Club;
+import com.greta.federation.entity.Ligne;
+import com.greta.federation.entity.Stade;
 import com.greta.federation.exception.EntityNotFoundException;
 import com.greta.federation.exception.ErrorCodes;
 import com.greta.federation.exception.InvalidEntityException;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,6 +61,23 @@ public class AileServiceImpl implements AileService {
                 .stream()
                 .map(AileDto::fromEntity)
                 .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<String> findLigneNomByAileId(Integer id) {
+        Optional<Aile> stadeOptional = aileRepository.findById(id);
+
+        if(stadeOptional.isPresent()){
+            Aile aile = stadeOptional.get();
+            List<Ligne> lignes = aile.getLignes();
+            if (lignes != null && !lignes.isEmpty()) {
+                return lignes.stream()
+                        .map(Ligne::getNom)
+                        .collect(Collectors.toList());
+            }
+        }
+        return null;
     }
 
     @Override

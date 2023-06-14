@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Aile")
@@ -18,4 +19,8 @@ public class Aile extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "id_stade")
     private Stade stade;
+
+    @OneToMany (mappedBy ="aile",cascade=CascadeType.ALL)
+    private List<Ligne> lignes;
+
 }

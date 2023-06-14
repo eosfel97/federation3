@@ -44,7 +44,13 @@ public class StadeController implements StadeApi {
     }
 
     @Override
+    public List<String> findAileNomByStadeId(Integer stadeId) {
+        return stadeService.findAileNomByStadeId(stadeId);
+    }
+    @Override
     public void delete(Integer id) {
         stadeService.delete(id);
     }
+
+
 }

@@ -33,6 +33,10 @@ public class LigneController implements LigneApi {
     public List<LigneDto> findAll() {
         return ligneService.findAll();
     }
+    @Override
+    public List<String> findPlaceNomByLigneId(Integer aileId) {
+        return ligneService.findPlaceNomByLigneId(aileId);
+    }
 
     @Override
     public void delete(Integer id) {
