@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api("/rencontres")
 public interface RencontreApi {
@@ -45,6 +46,12 @@ public interface RencontreApi {
             @ApiResponse(code = 200, message = "La liste des rencontres / Une liste vide")
     })
     List<RencontreDto> findAll();
+    @GetMapping(value = Constants.APP_ROOT + "/rencontres/summaries", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoie la liste des résumés de rencontres", notes = "Cette méthode permet de rechercher et renvoyer la liste des résumés de rencontres qui existent dans la base de données", responseContainer = "List<Map<String, Object>>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des résumés de rencontres / Une liste vide")
+    })
+    List<Map<String, Object>> findAllSummaries();
 
     @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/rencontres/delete/{id_rencontre}")
     @ApiOperation(value = "Supprimer une rencontre", notes = "Cette méthode permet de supprimer une rencontre par ID")
@@ -52,5 +59,6 @@ public interface RencontreApi {
             @ApiResponse(code = 200, message = "La rencontre a été supprimée"),
             @ApiResponse(code = 404, message = "Aucune rencontre n'existe dans la base de données avec l'ID fourni")
     })
+
     void delete(@PathVariable("id_rencontre") Integer id);
 }

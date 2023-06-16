@@ -19,7 +19,7 @@ public class RencontreDto {
     @JsonIgnore
     private List<ArbitreDto> arbitres;
     private EquipeDto equipeExterieure;
-    private Stade stade;
+    private StadeDto stade;
     private EquipeDto equipeDomicile;
     private CompetitionDto competition;
     @JsonIgnore
@@ -34,7 +34,7 @@ public class RencontreDto {
                 .nbButDomicile(rencontre.getNbButDomicile())
                 .nbButExterieur(rencontre.getNbButExterieur())
                 .dateRencontre(rencontre.getDateRencontre())
-                .stade(rencontre.getStade())
+                .stade(StadeDto.fromEntity(rencontre.getStade()))
                 .competition(CompetitionDto.fromEntity(rencontre.getCompetition()))
                 .equipeDomicile(EquipeDto.fromEntity(rencontre.getEquipeDomicile()))
                 .equipeExterieure(EquipeDto.fromEntity(rencontre.getEquipeExterieure()))
@@ -50,7 +50,7 @@ public class RencontreDto {
         rencontre.setDateRencontre(rencontreDto.getDateRencontre());
         rencontre.setNbButDomicile(rencontreDto.getNbButDomicile());
         rencontre.setNbButExterieur(rencontreDto.getNbButExterieur());
-        rencontre.setStade(rencontreDto.getStade());
+        rencontre.setStade(StadeDto.toEntity(rencontreDto.getStade()));
         rencontre.setCompetition(CompetitionDto.toEntity(rencontreDto.getCompetition()));
         rencontre.setEquipeDomicile(EquipeDto.toEntity(rencontreDto.getEquipeDomicile()));
         rencontre.setEquipeExterieure(EquipeDto.toEntity(rencontreDto.getEquipeExterieure()));
