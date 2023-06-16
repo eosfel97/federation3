@@ -2,9 +2,6 @@ package com.greta.federation.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greta.federation.entity.Billet;
-import com.greta.federation.entity.Rencontre;
-import com.greta.federation.entity.Place;
-import com.greta.federation.entity.User;
 import lombok.Builder;
 import lombok.Data;
 

@@ -3,7 +3,7 @@ package com.greta.federation.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greta.federation.entity.Aile;
 import com.greta.federation.entity.Ligne;
-import com.greta.federation.entity.Stade;
+
 import lombok.Builder;
 import lombok.Data;
 
