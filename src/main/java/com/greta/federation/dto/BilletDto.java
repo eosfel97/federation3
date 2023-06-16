@@ -17,11 +17,11 @@ public class BilletDto {
     private String numero;
     private LocalDateTime dateAchat;
     @JsonIgnore
-    private Rencontre rencontre;
+    private RencontreDto rencontre;
     @JsonIgnore
-    private Place place;
+    private PlaceDto place;
     @JsonIgnore
-    private User user;
+    private UserDto user;
 
     public static BilletDto fromEntity(Billet billet) {
         if (billet == null) {
@@ -31,9 +31,9 @@ public class BilletDto {
                 .id(billet.getId())
                 .numero(billet.getNumero())
                 .dateAchat(billet.getDateAchat())
-                .rencontre(billet.getRencontre())
-                .place(billet.getPlace())
-                .user(billet.getUser())
+                .rencontre(RencontreDto.fromEntity(billet.getRencontre()))
+                .place(PlaceDto.fromEntity(billet.getPlace()))
+                .user(UserDto.fromEntity(billet.getUser()))
                 .build();
     }
 
@@ -45,9 +45,9 @@ public class BilletDto {
         billet.setId(billetDto.getId());
         billet.setNumero(billetDto.getNumero());
         billet.setDateAchat(billetDto.getDateAchat());
-        billet.setRencontre(billetDto.getRencontre());
-        billet.setPlace(billetDto.getPlace());
-        billet.setUser(billetDto.getUser());
+        billet.setRencontre(RencontreDto.toEntity(billetDto.getRencontre()));
+        billet.setPlace(PlaceDto.toEntity(billetDto.getPlace()));
+        billet.setUser(UserDto.toEntity(billetDto.getUser()));
 
         return billet;
     }

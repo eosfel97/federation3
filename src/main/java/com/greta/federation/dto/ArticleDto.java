@@ -9,7 +9,10 @@ import lombok.Data;
 
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 @Builder
 public class ArticleDto {
@@ -21,7 +24,7 @@ public class ArticleDto {
     private BigDecimal quantite;
     private CategorieDto categorie;
     @JsonIgnore
-    private List<LigneCommande> ligneCommande;
+    private List<LigneCommandeDto> ligneCommande;
 
     private String photo;
 
@@ -39,9 +42,14 @@ public class ArticleDto {
                 .description(article.getDescription())
                 .quantite(article.getQuantite())
                 .photo(article.getPhoto())
+                .ligneCommande(LigneCommandeDto.fromEntityList(article.getLigneCommande()))
+
                 .categorie(CategorieDto.fromEntity(article.getCategorie()))
                 .build();
     }
+
+
+
     public static Article toEntity(ArticleDto articleDto) {
         if (articleDto == null) {
             return null;
