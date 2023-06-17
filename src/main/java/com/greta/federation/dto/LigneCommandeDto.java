@@ -16,9 +16,7 @@ public class LigneCommandeDto {
 
     private BigDecimal quantite;
 
-
     private BigDecimal prixUnitaire;
-
 
     private CommandeDto commande;
 
