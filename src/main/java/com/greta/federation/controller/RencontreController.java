@@ -6,6 +6,7 @@ import com.greta.federation.services.RencontreService;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class RencontreController implements RencontreApi {
@@ -24,6 +25,11 @@ public class RencontreController implements RencontreApi {
     @Override
     public List<RencontreDto> findAll() {
         return rencontreService.findAll();
+    }
+
+    @Override
+    public List<Map<String, Object>> findAllSummaries() {
+        return rencontreService.findAllSummaries();
     }
 
     @Override

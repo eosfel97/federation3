@@ -13,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,8 +59,28 @@ public class RencontreServiceImpl implements RencontreService {
     @Override
     public List<RencontreDto> findAll() {
         List<Rencontre> rencontres = rencontreRepository.findAll();
-        return rencontres.stream()
+
+
+        List<Rencontre> rencontresDistinctes = rencontres.stream()
+                .distinct()
+                .collect(Collectors.toList());
+
+        return rencontresDistinctes.stream()
                 .map(RencontreDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+    @Override
+    public List<Map<String, Object>> findAllSummaries() {
+        return rencontreRepository.findAll().stream()
+                .map(rencontre -> {
+                    Map<String, Object> summary = new HashMap<>();
+                    summary.put("dateRencontre", rencontre.getDateRencontre());
+                    summary.put("equipeDomicile", rencontre.getEquipeDomicile().getNom());
+                    summary.put("equipeExterieure", rencontre.getEquipeExterieure().getNom());
+                    summary.put("stade de la rencontre", rencontre.getStade().getNom());
+                    summary.put("le nombre de place du stade", rencontre.getStade().getNbPlaces());
+                    return summary;
+                })
                 .collect(Collectors.toList());
     }
 

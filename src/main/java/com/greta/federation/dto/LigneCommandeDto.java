@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -47,5 +50,12 @@ public class LigneCommandeDto {
         return ligneCommande;
     }
 
-
+    public static List<LigneCommandeDto> fromEntityList(List<LigneCommande> ligneCommandes) {
+        if (ligneCommandes == null) {
+            return Collections.emptyList();
+        }
+        return ligneCommandes.stream()
+                .map(LigneCommandeDto::fromEntity)
+                .collect(Collectors.toList());
+    }
 }

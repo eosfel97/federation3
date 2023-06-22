@@ -3,7 +3,7 @@ package com.greta.federation.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greta.federation.entity.Aile;
 import com.greta.federation.entity.Ligne;
-import com.greta.federation.entity.Stade;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,7 +16,7 @@ public class AileDto {
     private Integer id;
     private String nom;
     @JsonIgnore
-    private Stade stade;
+    private StadeDto stade;
     private List<LigneDto> lignes;
 
     public static AileDto fromEntity(Aile aile) {
@@ -29,7 +29,7 @@ public class AileDto {
         return AileDto.builder()
                 .id(aile.getId())
                 .nom(aile.getNom())
-                .stade(aile.getStade())
+                .stade(StadeDto.fromEntity(aile.getStade()))
                 .lignes(ligneDtos)
                 .build();
     }
@@ -38,13 +38,13 @@ public class AileDto {
         if (aileDto == null) {
             return null;
         }
-        Aile aile = new Aile();
-        aile.setId(aileDto.getId());
-        aile.setNom(aileDto.getNom());
-        aile.setStade(aileDto.getStade());
         List<Ligne> lignes = aileDto.getLignes().stream()
                 .map(LigneDto::toEntity)
                 .collect(Collectors.toList());
+        Aile aile = new Aile();
+        aile.setId(aileDto.getId());
+        aile.setNom(aileDto.getNom());
+        aile.setStade(StadeDto.toEntity(aileDto.getStade()));
 
         aile.setLignes(lignes);
         return aile;
