@@ -27,25 +27,6 @@ public class CommandeController implements CommandeApi {
     }
 
 
-    @Override
-    public ResponseEntity<CommandeDto> updateQuantiteCommande(Integer idCommande, Integer idLigneCommande, BigDecimal quantite) {
-        return ResponseEntity.ok(commandeService.updateQuantiteCommande(idCommande, idLigneCommande, quantite));
-    }
-
-    @Override
-    public ResponseEntity<CommandeDto> updateClient(Integer idCommande, Integer idUser) {
-        return ResponseEntity.ok(commandeService.updateClient(idCommande, idUser));
-    }
-
-    @Override
-    public ResponseEntity<CommandeDto> updateArticle(Integer idCommande, Integer idLigneCommande, Integer idArticle) {
-        return ResponseEntity.ok(commandeService.updateArticle(idCommande, idLigneCommande, idArticle));
-    }
-
-    @Override
-    public ResponseEntity<CommandeDto> deleteArticle(Integer idCommande, Integer idLigneCommande) {
-        return ResponseEntity.ok(commandeService.deleteArticle(idCommande, idLigneCommande));
-    }
 
     @Override
     public ResponseEntity<CommandeDto> findById(Integer id) {
@@ -59,15 +40,6 @@ public class CommandeController implements CommandeApi {
         return ResponseEntity.ok(commandeService.findAll());
     }
 
-    @Override
-    public  ResponseEntity<List<CommandeDto>>findByDateCommande(LocalDateTime dateCommande){
-        return  ResponseEntity.ok(commandeService.findByDateCommande( dateCommande));
-    }
-
-    @Override
-    public ResponseEntity<List<LigneCommandeDto>> findAllLignesCommandesByCommandeId(Integer idCommande) {
-        return ResponseEntity.ok(commandeService.findAllLignesCommandesByCommandeId(idCommande));
-    }
 
     @Override
     public ResponseEntity<Void> delete(Integer id) {

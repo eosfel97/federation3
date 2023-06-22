@@ -3,15 +3,14 @@ package com.greta.federation.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greta.federation.entity.Article;
-import com.greta.federation.entity.LigneCommande;
 import lombok.Builder;
 import lombok.Data;
 
 
 import java.math.BigDecimal;
-import java.util.Collections;
+
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Data
 @Builder
