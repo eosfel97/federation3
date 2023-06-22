@@ -14,7 +14,7 @@ public class PlaceDto {
     private String nom;
     private BigDecimal prix;
 
-    private Ligne ligne;
+    private LigneDto ligne;
 
     public static PlaceDto fromEntity(Place place) {
         if (place == null) {
@@ -22,7 +22,7 @@ public class PlaceDto {
         }
         return PlaceDto.builder()
                 .id(place.getId())
-                .ligne(place.getLigne())
+                .ligne(LigneDto.fromEntity(place.getLigne()))
                 .nom(place.getNom())
                 .prix(place.getPrix())
                 .build();
@@ -34,7 +34,7 @@ public class PlaceDto {
         }
         Place place = new Place();
         place.setId(placeDto.getId());
-        place.setLigne(placeDto.getLigne());
+        place.setLigne(LigneDto.toEntity(placeDto.getLigne()));
         place.setPrix(placeDto.getPrix());
         place.setNom(placeDto.getNom());
 

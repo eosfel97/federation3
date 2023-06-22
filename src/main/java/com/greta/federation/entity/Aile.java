@@ -1,5 +1,6 @@
 package com.greta.federation.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Aile extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_stade")
+    @JsonBackReference
     private Stade stade;
 
     @OneToMany (mappedBy ="aile",cascade=CascadeType.ALL)

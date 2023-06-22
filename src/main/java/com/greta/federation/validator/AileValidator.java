@@ -17,7 +17,7 @@ public class AileValidator {
         if (!StringUtils.hasLength(dto.getNom())) {
             errors.add("Veuillez renseigner le nom de l'aile");
         }
-        if (dto.getStade() == null) {
+        if (dto.getStade()== null) {
             errors.add("Veuillez renseigner le stade parent de l'aile");
         }
 

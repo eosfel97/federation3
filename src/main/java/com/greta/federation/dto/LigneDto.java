@@ -1,5 +1,6 @@
 package com.greta.federation.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greta.federation.entity.Aile;
 import com.greta.federation.entity.Ligne;
 import com.greta.federation.entity.Place;
@@ -14,21 +15,19 @@ import java.util.stream.Collectors;
 public class LigneDto {
     private Integer id;
     private String nom;
-    private Aile aile;
+    private AileDto aile;
+    @JsonIgnore
     private List<PlaceDto> places;
 
     public static LigneDto fromEntity(Ligne ligne) {
         if (ligne == null) {
             return null;
         }
-        List<PlaceDto> placeDtos = ligne.getPlaces().stream()
-                .map(PlaceDto::fromEntity)
-                .collect(Collectors.toList());
+
         return LigneDto.builder()
                 .id(ligne.getId())
                 .nom(ligne.getNom())
-                .aile(ligne.getAile())
-                .places(placeDtos)
+                .aile(AileDto.fromEntity(ligne.getAile()))
                 .build();
     }
 
@@ -39,12 +38,8 @@ public class LigneDto {
         Ligne ligne = new Ligne();
         ligne.setId(ligneDto.getId());
         ligne.setNom(ligneDto.getNom());
-        ligne.setAile(ligneDto.getAile());
-        List<Place> places = ligneDto.getPlaces().stream()
-                .map(PlaceDto::toEntity)
-                .collect(Collectors.toList());
+        ligne.setAile(AileDto.toEntity(ligneDto.getAile()));
 
-        ligne.setPlaces(places);
         return ligne;
     }
 }
