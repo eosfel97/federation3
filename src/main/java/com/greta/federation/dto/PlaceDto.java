@@ -1,5 +1,6 @@
 package com.greta.federation.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greta.federation.entity.Ligne;
 import com.greta.federation.entity.Place;
 import lombok.Builder;
@@ -13,7 +14,7 @@ public class PlaceDto {
     private Integer id;
     private String nom;
     private BigDecimal prix;
-
+    @JsonIgnore
     private LigneDto ligne;
 
     public static PlaceDto fromEntity(Place place) {
@@ -22,7 +23,7 @@ public class PlaceDto {
         }
         return PlaceDto.builder()
                 .id(place.getId())
-                .ligne(LigneDto.fromEntity(place.getLigne()))
+
                 .nom(place.getNom())
                 .prix(place.getPrix())
                 .build();
@@ -34,7 +35,7 @@ public class PlaceDto {
         }
         Place place = new Place();
         place.setId(placeDto.getId());
-        place.setLigne(LigneDto.toEntity(placeDto.getLigne()));
+
         place.setPrix(placeDto.getPrix());
         place.setNom(placeDto.getNom());
 

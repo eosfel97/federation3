@@ -16,7 +16,7 @@ public class StadeDto {
     private String nom;
     private Integer nbPlaces;
     private String typeTerrain;
-    @JsonIgnore
+
     private List<AileDto> ailes;
     @JsonIgnore
     private List<ClubDto> clubs;
@@ -26,14 +26,16 @@ public class StadeDto {
         if (stade == null) {
             return null;
         }
-
+        List<AileDto> ailesDto = stade.getAiles().stream()
+                .map(AileDto::fromEntity)
+                .collect(Collectors.toList());
 
         return StadeDto.builder()
                 .id(stade.getId())
                 .nom(stade.getNom())
                 .nbPlaces(stade.getNbPlaces())
                 .typeTerrain(stade.getTypeTerrain())
-
+                .ailes(ailesDto)
                 .build();
     }
 
@@ -48,6 +50,11 @@ public class StadeDto {
         stade.setNbPlaces(stadeDto.getNbPlaces());
         stade.setTypeTerrain(stadeDto.getTypeTerrain());
 
+        List<Aile> ailes = stadeDto.getAiles().stream()
+                .map(AileDto::toEntity)
+                .collect(Collectors.toList());
+
+        stade.setAiles(ailes);
 
         return stade;
     }

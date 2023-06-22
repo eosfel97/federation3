@@ -15,8 +15,9 @@ import java.util.stream.Collectors;
 public class LigneDto {
     private Integer id;
     private String nom;
-    private AileDto aile;
     @JsonIgnore
+    private AileDto aile;
+
     private List<PlaceDto> places;
 
     public static LigneDto fromEntity(Ligne ligne) {
@@ -24,10 +25,14 @@ public class LigneDto {
             return null;
         }
 
+        List<PlaceDto> placesDto = ligne.getPlaces().stream()
+                .map(PlaceDto::fromEntity)
+                .collect(Collectors.toList());
+
         return LigneDto.builder()
                 .id(ligne.getId())
                 .nom(ligne.getNom())
-                .aile(AileDto.fromEntity(ligne.getAile()))
+                .places(placesDto)
                 .build();
     }
 
@@ -38,7 +43,7 @@ public class LigneDto {
         Ligne ligne = new Ligne();
         ligne.setId(ligneDto.getId());
         ligne.setNom(ligneDto.getNom());
-        ligne.setAile(AileDto.toEntity(ligneDto.getAile()));
+
 
         return ligne;
     }

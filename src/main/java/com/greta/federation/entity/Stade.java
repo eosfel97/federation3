@@ -33,6 +33,4 @@ public class Stade extends AbstractEntity {
 
 
 
-
-
 }
