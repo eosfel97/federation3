@@ -32,7 +32,7 @@ public interface RencontreApi {
     })
     RencontreDto update(@PathVariable("id_rencontre") Integer id, @RequestBody RencontreDto updatedRencontre);
 
-    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/rencontres/{id_rencontre}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/rencontres/{id_rencontre}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une rencontre par ID", notes = "Cette méthode permet de rechercher une rencontre par son ID", response = RencontreDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La rencontre a été trouvée dans la base de données"),

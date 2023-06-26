@@ -22,7 +22,7 @@ public interface StadeApi {
     @GetMapping(value = Constants.APP_ROOT + "/stades/filter/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un stade par nom", notes = "Cette méthode permet de chercher un stade par son nom", response = StadeDto.class)
     StadeDto findByNom(@PathVariable("nom") String nom);
-    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/stades/{id_stade}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/stades/{id_stade}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un stade par ID", notes = "Cette méthode permet de chercher un stade par son ID", response = StadeDto.class)
     StadeDto findById(@PathVariable("id_stade") Integer id);
 
