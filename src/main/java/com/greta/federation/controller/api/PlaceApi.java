@@ -11,18 +11,18 @@ import java.util.List;
 
 @Api("/places")
 public interface PlaceApi {
-    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/places/creer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/places", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer une place", notes = "Cette méthode permet d'enregistrer ou de modifier une place", response = PlaceDto.class)
     PlaceDto save(@RequestBody PlaceDto dto);
 
 
-    @GetMapping(value = Constants.APP_ROOT + "/places/filtrer/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/places/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une place par le nom de la ligne", notes = "Cette méthode permet de rechercher une place par le nom de la ligne", response = PlaceDto.class)
     List<PlaceDto> findByLigne (@PathVariable("nom") String nom);
 
 
 
-    @GetMapping(value = Constants.APP_ROOT + "/places/tous", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/places/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoyer la liste des places", notes = "Cette méthode permet de rechercher et renvoyer la liste des places qui existent dans la base de données", responseContainer = "List<PlaceDto>")
     List<PlaceDto> findAll();
 
@@ -30,7 +30,7 @@ public interface PlaceApi {
     @ApiOperation(value = "Rechercher une place par ID", notes = "Cette méthode permet de rechercher une place par son ID", response = PlaceDto.class)
     PlaceDto findById(@PathVariable("id_place") Integer id);
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/places/supprimer/{id_place}")
+    @DeleteMapping(value = Constants.DIRECTEUR_ENDPOINT + "/places/{id_place}")
     @ApiOperation(value = "Supprimer une place", notes = "Cette méthode permet de supprimer une place par son ID")
     void delete(@PathVariable("id_place") Integer id);
 }

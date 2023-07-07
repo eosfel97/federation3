@@ -11,18 +11,18 @@ import java.util.List;
 @Api("/saisons")
 public interface SaisonApi {
 
-    @PostMapping(Constants.ADMIN_ENDPOINT + "/saisons/create")
+    @PostMapping(Constants.ADMIN_ENDPOINT + "/saisons")
     ResponseEntity<SaisonDto> save(@RequestBody SaisonDto dto);
 
-    @GetMapping(Constants.ADMIN_ENDPOINT+"/saisons/{id_saison}")
+    @GetMapping(Constants.APP_ROOT+"/saisons/{id_saison}")
     ResponseEntity<SaisonDto> findById(@PathVariable("id_saison") Integer id);
 
-    @GetMapping(Constants.ADMIN_ENDPOINT+"/saisons/{all}")
+    @GetMapping(Constants.APP_ROOT+"/saisons/all")
     ResponseEntity<List<SaisonDto>> findAll();
 
-    @PutMapping(Constants.ADMIN_ENDPOINT+"/saisons/update/{id_saison}")
+    @PutMapping(Constants.ADMIN_ENDPOINT+"/saisons/{id_saison}")
     ResponseEntity<SaisonDto> update(@PathVariable("id_saison") Integer id, @RequestBody SaisonDto dto);
 
-    @DeleteMapping(Constants.ADMIN_ENDPOINT+"/saisons/delete/{id_saison}")
+    @DeleteMapping(Constants.ADMIN_ENDPOINT+"/saisons/{id_saison}")
     ResponseEntity<Void> delete(@PathVariable("id_saison") Integer id);
 }

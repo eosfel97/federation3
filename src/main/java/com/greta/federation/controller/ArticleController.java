@@ -42,10 +42,7 @@ public class ArticleController implements ArticleApi {
     public List<ArticleDto> findAll() {
         return articleService.findAll();
     }
-    @Override
-    public List<ArticleDto> findAllArticleByIdCategorie(Integer id_categorie) {
-        return articleService.findAllArticleByIdCategorie(id_categorie);
-    }
+
     @Override
     public List<LigneCommandeDto> findHistoriqueCommandeUser(Integer id_article) {
         return articleService.findHistoriqueCommandeUser(id_article);

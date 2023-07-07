@@ -15,7 +15,7 @@ import java.util.List;
 @Api("/billets")
 public interface BilletApi {
 
-    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/billets/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/billets", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un billet", notes = "Cette methode permet d'enregistrer ou modifier un billet", response = BilletDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet billet a été créer ou modifier"),
@@ -23,7 +23,7 @@ public interface BilletApi {
     })
     BilletDto save(@RequestBody BilletDto dto, UserDto userDto);
 
-    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/billets/{id_billet}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/billets/{id_billet}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un billet par ID", notes = "Cette methode permet de chercher un billet par son ID", response = BilletDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le billet a ete trouve dans la BDD"),
@@ -39,7 +39,7 @@ public interface BilletApi {
     })
     List<BilletDto> findAll();
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/billets/delete/{id_billet}")
+    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/billets/{id_billet}")
     @ApiOperation(value = "Supprimer un billet", notes = "Cette methode permet de supprimer un billet par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le billet a ete supprime")

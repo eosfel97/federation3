@@ -16,7 +16,7 @@ import java.util.List;
 public interface  CompetitionApi {
 
 
-    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/competitions/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/competitions", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Créer une competitions", notes = "Cette méthode permet de créer ou mettre à jour une competitions", response = CompetitionDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet competitions a été créé ou mis à jour"),
@@ -24,7 +24,7 @@ public interface  CompetitionApi {
     })
     CompetitionDto create(@RequestBody CompetitionDto dto);
 
-    @PutMapping(value = Constants.ADMIN_ENDPOINT + "/competitions/update/{id_competition}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = Constants.ADMIN_ENDPOINT + "/competitions/{id_competition}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Mettre à jour une competition", notes = "Cette méthode permet de mettre à jour une competitions existant", response = CompetitionDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La competitions a été mis à jour avec succès"),
@@ -33,7 +33,7 @@ public interface  CompetitionApi {
     })
     CompetitionDto update(@PathVariable("id_competition") Integer id, @RequestBody CompetitionDto updatedCCompetition);
 
-    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/competitions/{id_competition}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/competitions/{id_competition}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une competitions par ID", notes = "Cette méthode permet de rechercher une competitions par son ID", response = CompetitionDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La competitions a été trouvé dans la base de données"),
@@ -48,7 +48,7 @@ public interface  CompetitionApi {
     })
     List<CompetitionDto> findAll();
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/competitions/delete/{id_competition}")
+    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/competitions/{id_competition}")
     @ApiOperation(value = "Supprimer un competitions", notes = "Cette méthode permet de supprimer une competitions par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La competitions a été supprimé"),

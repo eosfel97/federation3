@@ -14,7 +14,7 @@ import java.util.List;
 @Api("/arbitres")
 public interface ArbitreApi {
 
-    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/arbitres/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/arbitres", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Créer un arbitre", notes = "Cette méthode permet de créer un arbitre", response = ArbitreDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet arbitre a été créé"),
@@ -22,13 +22,13 @@ public interface ArbitreApi {
     })
     ArbitreDto save(@RequestBody ArbitreDto dto);
 
-    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/arbitres/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/arbitres/{id_arbitre}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un arbitre par ID", notes = "Cette méthode permet de rechercher un arbitre par son ID", response = ArbitreDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'arbitre a été trouvé dans la base de données"),
             @ApiResponse(code = 404, message = "Aucun arbitre n'existe dans la base de données avec l'ID fourni")
     })
-    ArbitreDto findById(@PathVariable("id") Integer id);
+    ArbitreDto findById(@PathVariable("id_arbitre") Integer id);
 
     @GetMapping(value = Constants.APP_ROOT +"/arbitres/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoie la liste des arbitres", notes = "Cette méthode permet de rechercher et renvoyer la liste des arbitres qui existent dans la base de données", responseContainer = "List<ArbitreDto>")
@@ -37,11 +37,11 @@ public interface ArbitreApi {
     })
     List<ArbitreDto> findAll();
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT +"/arbitres/delete/{id}")
+    @DeleteMapping(value = Constants.ADMIN_ENDPOINT +"/arbitres/{id}")
     @ApiOperation(value = "Supprimer un arbitre", notes = "Cette méthode permet de supprimer un arbitre par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'arbitre a été supprimé"),
             @ApiResponse(code = 404, message = "Aucun arbitre n'existe dans la base de données avec l'ID fourni")
     })
-    void delete(@PathVariable("id") Integer id);
+    void delete(@PathVariable("id_arbitre") Integer id);
 }

@@ -15,7 +15,7 @@ import java.util.Map;
 @Api("/rencontres")
 public interface RencontreApi {
 
-    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/rencontres/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/rencontres", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Créer une rencontre", notes = "Cette méthode permet de créer ou mettre à jour une rencontre", response = RencontreDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet rencontre a été créé ou mis à jour"),
@@ -23,7 +23,7 @@ public interface RencontreApi {
     })
     RencontreDto create(@RequestBody RencontreDto dto);
 
-    @PutMapping(value = Constants.ADMIN_ENDPOINT + "/rencontres/update/{id_rencontre}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = Constants.ADMIN_ENDPOINT + "/rencontres/{id_rencontre}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Mettre à jour une rencontre", notes = "Cette méthode permet de mettre à jour une rencontre existante", response = RencontreDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La rencontre a été mise à jour avec succès"),
@@ -53,7 +53,7 @@ public interface RencontreApi {
     })
     List<Map<String, Object>> findAllSummaries();
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/rencontres/delete/{id_rencontre}")
+    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/rencontres/{id_rencontre}")
     @ApiOperation(value = "Supprimer une rencontre", notes = "Cette méthode permet de supprimer une rencontre par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La rencontre a été supprimée"),

@@ -1,33 +1,28 @@
+
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/federation3?createDatabaseIfNotExist=true&userSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  ## Specify DBMS
-  jpa:
-    database: MYSQL
-    show-sql: false
-    properties:
-      hibernate:
-        session_factory:
-    # Hibernate DDL Auto (create, create-drop, update)
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.MySQL5Dialect
-
+datasource:
+url: jdbc:mysql://localhost:3306/federation3?createDatabaseIfNotExist=true&useSSL=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+username: ${dbUserName}
+password: ${dbUserPasse}
+driver-class-name: com.mysql.cj.jdbc.Driver
+jpa:
+database: MYSQL
+show-sql: false
+hibernate:
+ddl-auto: update
+dialect: org.hibernate.dialect.MySQL5Dialect
 server:
-  port: 7071
-
+port: 7071
 flickr:
-  apiKey: 5bcd3879894e4382f493bc1271681be0
-  apiSecret: b2fb6bbb9ee7ad2f
-  appKey: 72157720879200892-8b801b1d4b788005
-  appSecret: 7cc4446ac4f77e05
+apiKey: ${ApiKeyFlickr}
+apiSecret: ${ApiSecretFlickr}
+appKey: ${AppKeyFlickr}
+appSecret: ${AppSecretFlickr}
 logging:
-  level:
-    com.greta.federation: TRACE
-  file:
-    name: logs/app.log
+level:
+com.greta.federation: TRACE
+file:
+name: logs/app.log
 stripe:
-  secretKey: sk_test_51KX6uPAXs1xr62PHMRfRVmUMHdb6KD7OnCVB2ddaVxIeDZVRRBL4lIZjfCAgwb5j00TOUDfZbScoFuym4WFmnVhe00ZDBwXT1U
+secretKey: ${StripSecretKey}
+

@@ -15,7 +15,7 @@ import java.util.List;
 @Api("/equipes")
 public interface EquipeApi {
 
-    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/equipes/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/equipes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Créer une équipe", notes = "Cette méthode permet de créer ou mettre à jour une équipe", response = EquipeDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet équipe a été créé ou mis à jour"),
@@ -23,7 +23,7 @@ public interface EquipeApi {
     })
     EquipeDto save(@RequestBody EquipeDto dto);
 
-    @GetMapping(value = Constants.ADMIN_ENDPOINT+ "/equipes/{id_equipe}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT+ "/equipes/{id_equipe}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une équipe par ID", notes = "Cette méthode permet de rechercher une équipe par son ID", response = EquipeDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'équipe a été trouvé dans la base de données"),
@@ -32,7 +32,7 @@ public interface EquipeApi {
     EquipeDto findById(@PathVariable("id_equipe") Integer id);
 
 
-    @GetMapping(value = Constants.APP_ROOT + "/equipes/filter/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/equipes/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un stade par nom", notes = "Cette méthode permet de chercher un stade par son nom", response = StadeDto.class)
     EquipeDto findByNom(@PathVariable("nom") String nom);
 
@@ -45,7 +45,7 @@ public interface EquipeApi {
     List<EquipeDto> findAll();
 
 
-    @DeleteMapping(value = Constants.DIRECTEUR_ENDPOINT+ "/equipes/delete/{id_equipe}")
+    @DeleteMapping(value = Constants.DIRECTEUR_ENDPOINT+ "/equipes/{id_equipe}")
     @ApiOperation(value = "Supprimer une équipe", notes = "Cette méthode permet de supprimer une équipe par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'équipe a été supprimée"),

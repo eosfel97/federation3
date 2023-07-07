@@ -16,7 +16,7 @@ import java.util.List;
 public interface  EvenementRencontreApi {
 
 
-    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/evenements-rencontres/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/evenements-rencontres", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Créer une evenementsrencontres", notes = "Cette méthode permet de créer ou mettre à jour une evenementsrencontres", response = EvenementRencontreDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet evenementsrencontres a été créé ou mis à jour"),
@@ -24,7 +24,7 @@ public interface  EvenementRencontreApi {
     })
     EvenementRencontreDto create(@RequestBody EvenementRencontreDto dto);
 
-    @PutMapping(value = Constants.ADMIN_ENDPOINT + "/evenements-rencontres/update/{id_evenement_rencontre}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = Constants.ADMIN_ENDPOINT + "/evenements-rencontres/{id_evenement_rencontre}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Mettre à jour une evenementsrencontres", notes = "Cette méthode permet de mettre à jour une evenementsrencontres existant", response = EvenementRencontreDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L' evenementsrencontres a été mis à jour avec succès"),
@@ -33,7 +33,7 @@ public interface  EvenementRencontreApi {
     })
     EvenementRencontreDto update(@PathVariable("id_evenement_rencontre") Integer id, @RequestBody EvenementRencontreDto updatedEvenementRencontre);
 
-    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/evenements-rencontres/{id_evenement_rencontre}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/evenements-rencontres/{id_evenement_rencontre}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une evenementsrencontres par ID", notes = "Cette méthode permet de rechercher une evenementsrencontres par son ID", response = EvenementRencontreDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L' evenementsrencontres a été trouvé dans la base de données"),
@@ -48,7 +48,7 @@ public interface  EvenementRencontreApi {
     })
     List<EvenementRencontreDto> findAll();
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/evenements-rencontres/delete/{id_evenement_rencontre}")
+    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/evenements-rencontres/{id_evenement_rencontre}")
     @ApiOperation(value = "Supprimer un evenementsrencontres", notes = "Cette méthode permet de supprimer une evenementsrencontres par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La evenementsrencontres a été supprimé"),

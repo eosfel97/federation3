@@ -13,7 +13,7 @@ import java.util.List;
 
 @Api("/commandes")
 public interface CommandeApi {
-    @PostMapping(Constants.APP_ROOT + "/commandes/create")
+    @PostMapping(Constants.APP_ROOT + "/commandes")
     ResponseEntity<CommandeDto> save(@RequestBody CommandeDto dto);
 
     @GetMapping(Constants.APP_ROOT + "/commandes/{idCommandeClient}")
@@ -23,7 +23,7 @@ public interface CommandeApi {
     ResponseEntity<List<CommandeDto>> findAll();
 
 
-    @DeleteMapping(Constants.APP_ROOT + "/commandes/delete/{idCommandeClient}")
+    @DeleteMapping(Constants.APP_ROOT + "/commandes/{idCommandeClient}")
     ResponseEntity<Void> delete(@PathVariable("idCommandeClient") Integer id);
 
 }

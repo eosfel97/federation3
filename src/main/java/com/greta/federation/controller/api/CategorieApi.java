@@ -14,7 +14,7 @@ import java.util.List;
 @Api("categories")
 public interface CategorieApi {
 
-    @PostMapping(value = Constants.APP_ROOT + "/categories/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/categories", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer une categorie", notes = "Cette methode permet d'enregistrer ou modifier une categorie", response =
             CategorieDto.class)
     @ApiResponses(value = {
@@ -32,7 +32,7 @@ public interface CategorieApi {
     })
     CategorieDto findById(@PathVariable("id_categorie") Integer idCategory);
 
-    @GetMapping(value = Constants.APP_ROOT + "/categories/filter/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/categories/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une categorie par Nom", notes = "Cette methode permet de chercher une categorie par son Nom", response =
             CategorieDto.class)
     @ApiResponses(value = {
@@ -49,7 +49,7 @@ public interface CategorieApi {
     })
     List<CategorieDto> findAll();
 
-    @DeleteMapping(value = Constants.APP_ROOT + "/categories/delete/{id_categorie}")
+    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/categories/{id_categorie}")
     @ApiOperation(value = "Supprimer un article", notes = "Cette methode permet de supprimer une categorie par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La categorie a ete supprime")

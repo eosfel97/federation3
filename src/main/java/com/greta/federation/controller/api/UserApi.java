@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api("users")
+@Api("/users")
 public interface UserApi {
 
-    @PostMapping(Constants.USER_ENDPOINT + "/create")
+    @PostMapping(Constants.USER_ENDPOINT )
     UserDto save(@RequestBody UserDto dto);
 
-    @PostMapping(Constants.USER_ENDPOINT + "/update/password")
+    @PutMapping(Constants.USER_ENDPOINT )
     UserDto changerMotDePasse(@RequestBody ChangerMotDePasseUserDto dto);
 
-    @GetMapping(Constants.ADMIN_ENDPOINT + "/{id_user}")
+    @GetMapping(Constants.ADMIN_ENDPOINT + "/users/{id_user}")
     UserDto findById(@PathVariable("id_user") Integer id);
 
-    @GetMapping(Constants.ADMIN_ENDPOINT + "/find/{email}")
+    @GetMapping(Constants.ADMIN_ENDPOINT + "/users/{email}")
     UserDto findByEmail(@PathVariable("email") String email);
 
-    @GetMapping(Constants.ADMIN_ENDPOINT + "/users/all")
+    @GetMapping(Constants.ADMIN_ENDPOINT+ "/users/all")
     List<UserDto> findAll();
 
-    @DeleteMapping(Constants.ADMIN_ENDPOINT + "/delete/{id_user}")
+    @DeleteMapping(Constants.ADMIN_ENDPOINT + "/users/{id_user}")
     void delete(@PathVariable("id_user") Integer id);
 }

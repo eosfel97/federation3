@@ -14,7 +14,7 @@ import java.util.List;
 @Api("/actualites")
 public interface ActualiteApi {
 
-    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/actualites/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.ADMIN_ENDPOINT + "/actualites", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer une actualité", notes = "Cette méthode permet d'enregistrer ou modifier une actualité", response = ActualiteDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet actualité a été créé ou modifié"),
@@ -22,7 +22,7 @@ public interface ActualiteApi {
     })
     ActualiteDto save(@RequestBody ActualiteDto dto);
 
-    @PutMapping(value = Constants.ADMIN_ENDPOINT + "/actualites/update/{id_actualite}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = Constants.ADMIN_ENDPOINT + "/actualites/{id_actualite}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Mettre à jour une actualité", notes = "Cette méthode permet de mettre à jour une actualité existante", response = ActualiteDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'actualité a été mise à jour avec succès"),
@@ -31,7 +31,7 @@ public interface ActualiteApi {
     })
     ActualiteDto update(@PathVariable("id_actualite") Integer id, @RequestBody ActualiteDto updatedActualite);
 
-    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/actualites/{id_actualite}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/actualites/{id_actualite}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une actualité par ID", notes = "Cette méthode permet de chercher une actualité par son ID", response = ActualiteDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'actualité a été trouvée dans la BDD"),
@@ -39,7 +39,7 @@ public interface ActualiteApi {
     })
     ActualiteDto findById(@PathVariable("id_actualite") Integer id);
 
-    @GetMapping(value = Constants.APP_ROOT + "/actualites/filter/{titre}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/actualites/{titre}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une actualité par titre", notes = "Cette méthode permet de chercher une actualité par son titre", response = ActualiteDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'actualité a été trouvée dans la BDD"),
@@ -54,7 +54,7 @@ public interface ActualiteApi {
     })
     List<ActualiteDto> findAll();
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/actualites/delete/{id_actualite}")
+    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/actualites/{id_actualite}")
     @ApiOperation(value = "Supprimer une actualité", notes = "Cette méthode permet de supprimer une actualité par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'actualité a été supprimée")

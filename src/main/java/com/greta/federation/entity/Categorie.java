@@ -18,7 +18,7 @@ public class Categorie extends AbstractEntity {
 
     @Column(name="nom")
     private String nom;
-    @OneToMany(mappedBy = "categorie")
+    @OneToMany(fetch = FetchType.EAGER , mappedBy = "categorie")
     private List<Article> articles;
 
 }

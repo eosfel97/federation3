@@ -14,7 +14,7 @@ import java.util.List;
 @Api("/ailes")
 public interface AileApi {
 
-    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/ailes/creer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/ailes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Créer une aile", notes = "Cette méthode permet de créer ou mettre à jour une aile", response = AileDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet aile a été créé ou mis à jour"),
@@ -31,7 +31,7 @@ public interface AileApi {
     })
     AileDto findById (@PathVariable("id_aile") Integer id);
 
-    @GetMapping(value = Constants.APP_ROOT + "/ailes/filtrer/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/ailes/{nom}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une aile par nom", notes = "Cette méthode permet de rechercher une aile par son nom", response = AileDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'aile a été trouvée dans la base de données"),
@@ -39,7 +39,7 @@ public interface AileApi {
     })
     AileDto findByNom(@PathVariable("nom") String nom);
 
-    @GetMapping(value = Constants.APP_ROOT + "/ailes/toutes", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/ailes/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoyer la liste des ailes", notes = "Cette méthode permet de rechercher et renvoyer la liste des ailes qui existent dans la base de données", responseContainer = "List<AileDto>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des ailes / Une liste vide")
@@ -47,11 +47,11 @@ public interface AileApi {
     List<AileDto> findAll();
 
 
-    @GetMapping(value = Constants.APP_ROOT + "/ailes/{id_aile}/lignes/noms", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/ailes/lignes/{id_aile}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi les noms des lignes par aile ID", notes = "Cette méthode permet de chercher et renvoyer les noms des lignes d'une aile donné par ID", responseContainer = "List<String>")
     List<String> findLigneNomByAileId(@PathVariable("id_aile") Integer aileId);
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/ailes/supprimer/{id_aile}")
+    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/ailes/{id_aile}")
     @ApiOperation(value = "Supprimer une aile", notes = "Cette méthode permet de supprimer une aile par son ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'aile a été supprimée"),

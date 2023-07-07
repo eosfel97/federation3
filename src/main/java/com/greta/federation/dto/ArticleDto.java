@@ -28,25 +28,27 @@ public class ArticleDto {
     private String photo;
 
 
-    public static ArticleDto fromEntity(Article article){
+    public static ArticleDto fromEntity(Article article) {
+        return fromEntity(article, true);
+    }
 
-        if(article == null) {
-            return  null ;
+    public static ArticleDto fromEntity(Article article, boolean includeLigneCommande) {
+        if (article == null) {
+            return null;
             // TODO throw an exception
         }
-        return  ArticleDto.builder()
+        List<LigneCommandeDto> ligneCommandeDtos = includeLigneCommande ? LigneCommandeDto.fromEntityList(article.getLigneCommande()) : null;
+        return ArticleDto.builder()
                 .id(article.getId())
                 .prix(article.getPrix())
                 .nom(article.getNom())
                 .description(article.getDescription())
                 .quantite(article.getQuantite())
                 .photo(article.getPhoto())
-                .ligneCommande(LigneCommandeDto.fromEntityList(article.getLigneCommande()))
-
-                .categorie(CategorieDto.fromEntity(article.getCategorie()))
+                .ligneCommande(ligneCommandeDtos)
+                .categorie(CategorieDto.fromEntity(article.getCategorie(), false))
                 .build();
     }
-
 
 
     public static Article toEntity(ArticleDto articleDto) {

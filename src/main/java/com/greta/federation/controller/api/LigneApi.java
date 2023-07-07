@@ -11,7 +11,7 @@ import java.util.List;
 
 @Api("/lignes")
 public interface LigneApi {
-    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/lignes/creer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/lignes", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer une ligne", notes = "Cette méthode permet d'enregistrer ou de modifier une ligne", response = LigneDto.class)
     LigneDto save(@RequestBody LigneDto dto);
 
@@ -19,15 +19,15 @@ public interface LigneApi {
     @ApiOperation(value = "Récupérer une ligne par ID", notes = "Cette méthode permet de récupérer une ligne par son ID", response = LigneDto.class)
     LigneDto findById(@PathVariable("id_ligne") Integer id);
 
-    @GetMapping(value = Constants.APP_ROOT + "/lignes/tous", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/lignes/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoyer la liste des lignes", notes = "Cette méthode permet de rechercher et renvoyer la liste de toutes les lignes", responseContainer = "List<LigneDto>")
     List<LigneDto> findAll();
 
-    @GetMapping(value = Constants.APP_ROOT + "/lignes/{id_ligne}/places/noms", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/lignes/places/{id_ligne}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi les noms des places par ligne ID", notes = "Cette méthode permet de chercher et renvoyer les noms des places d'une ligne donné par ID", responseContainer = "List<String>")
     List<String> findPlaceNomByLigneId(@PathVariable("id_ligne") Integer ligneId);
 
-    @DeleteMapping(value = Constants.ADMIN_ENDPOINT + "/lignes/supprimer/{id_ligne}")
+    @DeleteMapping(value = Constants.DIRECTEUR_ENDPOINT + "/lignes/{id_ligne}")
     @ApiOperation(value = "Supprimer une ligne", notes = "Cette méthode permet de supprimer une ligne par son ID")
     void delete(@PathVariable("id_ligne") Integer id);
 }

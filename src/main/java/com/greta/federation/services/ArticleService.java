@@ -16,7 +16,7 @@ public interface ArticleService {
 
     List<LigneCommandeDto> findHistoriqueCommandeUser(Integer id_article);
 
-    List<ArticleDto> findAllArticleByIdCategorie(Integer id_categorie);
+
 
     void delete(Integer id);
 

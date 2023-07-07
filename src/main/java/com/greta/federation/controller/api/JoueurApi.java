@@ -14,7 +14,7 @@ import java.util.List;
 @Api("/joueurs")
 public interface JoueurApi {
 
-    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/joueurs/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.DIRECTEUR_ENDPOINT + "/joueurs", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Créer un joueur", notes = "Cette méthode permet de créer ou mettre à jour un joueur", response = JoueurDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet joueur a été créé ou mis à jour"),
@@ -22,7 +22,7 @@ public interface JoueurApi {
     })
     JoueurDto save(@RequestBody JoueurDto dto);
 
-    @PutMapping(value = Constants.DIRECTEUR_ENDPOINT + "/joueurs/update/{id_joueur}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = Constants.DIRECTEUR_ENDPOINT + "/joueurs/{id_joueur}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Mettre à jour un joueur", notes = "Cette méthode permet de mettre à jour un joueur existant", response = JoueurDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le joueur a été mis à jour avec succès"),
@@ -31,7 +31,7 @@ public interface JoueurApi {
     })
     JoueurDto update(@PathVariable("id_joueur") Integer id, @RequestBody JoueurDto updatedJoueur);
 
-    @GetMapping(value = Constants.ADMIN_ENDPOINT + "/joueurs/{id_joueur}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT + "/joueurs/{id_joueur}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un joueur par ID", notes = "Cette méthode permet de rechercher un joueur par son ID", response = JoueurDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le joueur a été trouvé dans la base de données"),
@@ -47,7 +47,7 @@ public interface JoueurApi {
     List<JoueurDto> findAll();
 
 
-    @DeleteMapping(value = Constants.DIRECTEUR_ENDPOINT + "/joueurs/delete/{id_joueur}")
+    @DeleteMapping(value = Constants.DIRECTEUR_ENDPOINT + "/joueurs/{id_joueur}")
     @ApiOperation(value = "Supprimer un joueur", notes = "Cette méthode permet de supprimer un joueur par ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le joueur a été supprimé"),

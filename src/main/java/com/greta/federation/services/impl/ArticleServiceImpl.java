@@ -107,12 +107,6 @@ public class ArticleServiceImpl implements ArticleService {
 
 
 
-    @Override
-    public List<ArticleDto> findAllArticleByIdCategorie(Integer id_categorie) {
-        return articleRepository.findAllByCategorieId(id_categorie).stream()
-                .map(ArticleDto::fromEntity)
-                .collect(Collectors.toList());
-    }
 
     @Override
     public void delete(Integer id) {
