@@ -43,22 +43,6 @@ public class ArticleServiceImpl implements ArticleService {
                 )
         );
     }
-    @Override
-    public ArticleDto update(Integer id, ArticleDto updatedArticle) {
-
-        Article existingArticle = articleRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Article not found with id " + id));
-
-        existingArticle.setNom(updatedArticle.getNom());
-        existingArticle.setDescription(updatedArticle.getDescription());
-        existingArticle.setPrix(updatedArticle.getPrix());
-        existingArticle.setQuantite(updatedArticle.getQuantite());
-        existingArticle.setCategorie(CategorieDto.toEntity(updatedArticle.getCategorie()));
-        ArticleDto existingArticleDto = ArticleDto.fromEntity(existingArticle);
-        return save(existingArticleDto);
-    }
-
-
 
     @Override
     public ArticleDto findById(Integer id) {
@@ -72,6 +56,21 @@ public class ArticleServiceImpl implements ArticleService {
                         "Aucun article avec l'ID = " + id + " n' ete trouve dans la BDD",
                         ErrorCodes.ARTICLE_NOT_FOUND)
         );
+    }
+
+    @Override
+    public ArticleDto update(Integer id, ArticleDto updatedArticle) {
+
+        Article existingArticle = articleRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Article not found with id " + id));
+
+        existingArticle.setNom(updatedArticle.getNom());
+        existingArticle.setDescription(updatedArticle.getDescription());
+        existingArticle.setPrix(updatedArticle.getPrix());
+        existingArticle.setQuantite(updatedArticle.getQuantite());
+        existingArticle.setCategorie(CategorieDto.toEntity(updatedArticle.getCategorie()));
+        ArticleDto existingArticleDto = ArticleDto.fromEntity(existingArticle);
+        return save(existingArticleDto);
     }
 
     @Override
